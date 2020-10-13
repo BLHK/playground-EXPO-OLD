@@ -1,16 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, TouchableOpacity, Button, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Button,
+  StyleSheet,
+  Platform,
+} from "react-native";
 import { Camera } from "expo-camera";
 
 const CameraScreen = (props) => {
   const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
+  const [type, setType] = useState(Camera.Constants.Type.front);
+  const [ratios, setRatios] = useState([]);
 
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
       setHasPermission(status === "granted");
     })();
+  }, []);
+
+  useEffect(() => {
+    if (Platform.OS === "android") {
+      (async () => {
+        const { ratios } = await Camera.getSupportedRatiosAsync();
+        setRatios(ratios);
+      })();
+    }
   }, []);
 
   if (hasPermission === null) {
@@ -44,6 +61,11 @@ const CameraScreen = (props) => {
             title="Go back!"
             style={styles.backButton}
             onPress={() => props.navigation.goBack()}
+          />
+          <Button
+            title="log"
+            style={styles.backButton}
+            onPress={() => console.log(ratios)}
           />
         </View>
       </Camera>
