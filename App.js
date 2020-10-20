@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Provider } from "react-redux";
+import Store from "./src/redux/Store";
 import MeetScreen from "./src/screens/MeetScreen";
 import ChatScreen from "./src/screens/ChatScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
@@ -13,12 +15,14 @@ const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Tabs" component={TabNavigator} />
-        <Stack.Screen name="Camera" component={CameraScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={Store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Tabs" component={TabNavigator} />
+          <Stack.Screen name="Camera" component={CameraScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
