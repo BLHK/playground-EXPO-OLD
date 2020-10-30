@@ -1,6 +1,6 @@
 import { GET_USERS, GENERATE_USER } from "./ActionTypes";
 
-let nextUserId = 0;
+let nextUserId = 2;
 let myImage = require("../../assets/500full-igor-bogdanoff.jpg");
 
 export const generateUser = () => ({
