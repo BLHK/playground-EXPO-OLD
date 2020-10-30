@@ -8,7 +8,7 @@ export const generateUser = () => ({
   payload: {
     id: ++nextUserId,
     image: myImage,
-    name: "myName " + i,
+    name: "myName " + nextUserId,
     message:
       "sdasdkasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdad",
   },

@@ -1,14 +1,12 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { connect } from "react-redux";
+import { generateUser } from "../redux/Actions";
 
 const MeetScreen = (props) => {
   return (
     <View style={styles.container}>
-      <Button
-        title="Press me"
-        onPress={() => props.navigation.navigate("Secondary")}
-      />
+      <Button title="Add User" onPress={() => props.generateUser()} />
       <Text>You have {props.users.length} users added.</Text>
     </View>
   );
@@ -28,4 +26,6 @@ const mapStateToProps = (state) => {
   return users;
 };
 
-export default connect(mapStateToProps)(MeetScreen);
+const mapDispatchToProps = { generateUser };
+
+export default connect(mapStateToProps, mapDispatchToProps)(MeetScreen);
