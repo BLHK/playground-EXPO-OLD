@@ -1,31 +1,46 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import {
+  FlatList,
+  SafeAreaView,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import { connect } from "react-redux";
-import { generateUser } from "../redux/Actions";
+import MeetUserCard from "../components/MeetUserCard";
 
 const MeetScreen = (props) => {
   return (
-    <View style={styles.container}>
-      <Button title="Add User" onPress={() => props.generateUser()} />
-      <Text>You have {props.users.length} users added.</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={props.users}
+        numColumns={3}
+        columnWrapperStyle={styles.flatListStyle}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("Conversation")}
+          >
+            <MeetUserCard params={item} />
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    </SafeAreaView>
   );
 };
+
+function mapStateToProps(state) {
+  const { users } = state;
+  return users;
+}
+
+export default connect(mapStateToProps)(MeetScreen);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
+  },
+  flatListStyle: {
+    justifyContent: "space-evenly",
+    paddingVertical: 5,
   },
 });
-
-const mapStateToProps = (state) => {
-  const { users } = state;
-  return users;
-};
-
-const mapDispatchToProps = { generateUser };
-
-export default connect(mapStateToProps, mapDispatchToProps)(MeetScreen);

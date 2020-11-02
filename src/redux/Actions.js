@@ -1,6 +1,6 @@
 import { GET_USERS, GENERATE_USER } from "./ActionTypes";
 
-let nextUserId = 2;
+let nextUserId = 1;
 let myImage = require("../../assets/500full-igor-bogdanoff.jpg");
 
 export const generateUser = () => ({
@@ -8,7 +8,7 @@ export const generateUser = () => ({
   payload: {
     id: ++nextUserId,
     image: myImage,
-    name: "myName " + nextUserId,
+    name: "Bog " + nextUserId,
     message:
       "sdasdkasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdad",
   },

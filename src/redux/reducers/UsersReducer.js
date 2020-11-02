@@ -7,7 +7,7 @@ const initialState = {
     {
       id: 1,
       image: myImage,
-      name: "myName " + 1,
+      name: "Bog " + 1,
       message:
         "sdasdkasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdad",
     },
