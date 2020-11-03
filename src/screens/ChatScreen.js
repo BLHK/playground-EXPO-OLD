@@ -1,29 +1,37 @@
-import React from "react";
-import { TouchableOpacity, FlatList, SafeAreaView } from "react-native";
-import { connect } from "react-redux";
-import ConversationCard from "../components/ConversationCard";
+import React, { useState, useCallback, useEffect } from "react";
+import { GiftedChat } from "react-native-gifted-chat";
 
-const ChatScreen = (props) => {
+export default ChatScreen = () => {
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    setMessages([
+      {
+        _id: 1,
+        text: "Hello you!",
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: "React Native",
+          avatar: "https://placeimg.com/140/140/any",
+        },
+      },
+    ]);
+  }, []);
+
+  const onSend = useCallback((messages = []) => {
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, messages)
+    );
+  }, []);
+
   return (
-    <SafeAreaView>
-      <FlatList
-        data={props.users}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("Conversation")}
-          >
-            <ConversationCard params={item} />
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item) => item.id.toString()}
-      />
-    </SafeAreaView>
+    <GiftedChat
+      messages={messages}
+      onSend={(messages) => onSend(messages)}
+      user={{
+        _id: 1,
+      }}
+    />
   );
 };
-
-function mapStateToProps(state) {
-  const { users } = state;
-  return users;
-}
-
-export default connect(mapStateToProps)(ChatScreen);

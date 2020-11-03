@@ -6,9 +6,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Provider } from "react-redux";
 import Store from "./src/redux/Store";
 import MeetScreen from "./src/screens/MeetScreen";
-import ChatScreen from "./src/screens/ChatScreen";
+import MessagesScreen from "./src/screens/MessagesScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import CameraScreen from "./src/screens/CameraScreen";
+import ChatScreen from "./src/screens/ChatScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -20,6 +21,11 @@ export default function App() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Tabs" component={TabNavigator} />
           <Stack.Screen name="Camera" component={CameraScreen} />
+          <Stack.Screen
+            name="ChatScreen"
+            component={ChatScreen}
+            options={{ headerShown: true }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
@@ -30,7 +36,7 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Meet" component={MeetScreen} />
-      <Tab.Screen name="Chat" component={ChatScreen} />
+      <Tab.Screen name="MessagesScreen" component={MessagesScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
