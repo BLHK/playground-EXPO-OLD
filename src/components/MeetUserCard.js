@@ -5,7 +5,6 @@ let cellWidth;
 
 const MeetUserCard = ({ params }) => {
   cellWidth = Dimensions.get("window").width / 3.4;
-  console.log(cellWidth);
 
   return (
     <View style={styles.container}>
