@@ -10,6 +10,7 @@ const ProfileScreen = (props) => {
         title={"Camera"}
         onPress={() => props.navigation.navigate("Camera")}
       />
+      <Button title={"Album"} />
       <Button title="Add User" onPress={() => props.generateUser()} />
       <Text>You have {props.users.length} users added.</Text>
     </View>
