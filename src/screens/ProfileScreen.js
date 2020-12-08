@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, Image, Platform, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { connect } from "react-redux";
-import { generateUser } from "../redux/Actions";
+import { postUser } from "../redux/Actions";
 
 const ProfileScreen = (props) => {
   const [image, setImage] = useState(null);
@@ -45,9 +45,7 @@ const ProfileScreen = (props) => {
       {image && (
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )}
-
-      <Button title="Add User" onPress={() => props.generateUser()} />
-      <Text>You have {props.users.length} users added.</Text>
+      <Button title="Post user" onPress={() => props.postUser()} />
     </View>
   );
 };
@@ -57,7 +55,7 @@ const mapStateToProps = (state) => {
   return users;
 };
 
-const mapDispatchToProps = { generateUser };
+const mapDispatchToProps = { postUser };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
 

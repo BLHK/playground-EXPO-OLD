@@ -1,32 +1,23 @@
 import { GET_USERS, GENERATE_USER } from "../ActionTypes";
-
-let myImage = require("../../../assets/500full-igor-bogdanoff.jpg");
+import { USERS } from "../Actions";
 
 const initialState = {
-  users: [
-    {
-      id: 1,
-      image: myImage,
-      name: "Bog " + 1,
-      message:
-        "sdasdkasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdadneckasdasdasdad",
-    },
-  ],
+  loading: false,
+  users: [],
+  error: null,
 };
 
-const userReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GENERATE_USER: {
-      const { id, image, name, message } = action.payload;
-      return {
-        ...state,
-        users: [...state.users, { id, image, name, message }],
-      };
-    }
-    case GET_USERS: {
-    }
+    case USERS.FETCH_USERS_REQUEST:
+      return { ...state, loading: true };
+    case USERS.FETCH_USERS_SUCCESS:
+      return { loading: false, users: action.payload, error: null };
+    case USERS.FETCH_USERS_FAILURE:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }
 };
-export default userReducer;
+
+export default usersReducer;

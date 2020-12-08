@@ -5,7 +5,7 @@ const ConversationCard = ({ params }) => {
   return (
     <View style={styles.background}>
       <View style={styles.conversationCard}>
-        <Image style={styles.profilePicture} source={params.image} />
+        <Image style={styles.profilePicture} source={{ uri: params.image }} />
         <View style={styles.textContainer}>
           <Text style={styles.nameField}>{params.name} </Text>
           <View style={styles.messageContainer}>

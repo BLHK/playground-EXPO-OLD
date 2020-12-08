@@ -11,7 +11,7 @@ import MeetUserCard from "../components/MeetUserCard";
 const MeetScreen = (props) => {
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
+      {/* <FlatList
         data={props.users}
         numColumns={3}
         columnWrapperStyle={styles.flatListStyle}
@@ -23,7 +23,7 @@ const MeetScreen = (props) => {
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item.id.toString()}
-      />
+      /> */}
     </SafeAreaView>
   );
 };
