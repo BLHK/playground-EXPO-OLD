@@ -10,9 +10,9 @@ export const USERS = {
   FETCH_USERS_SUCCESS: "FETCH_USERS_SUCCESS",
   FETCH_USERS_FAILURE: "FETCH_USERS_FAILURE",
 
-  POST_USER_REQUEST = "POST_USER_REQUEST",
-  POST_USER_SUCCESS = "POST_USER_SUCCESS",
-  POST_USER_ERROR = "POST_USER_ERROR",
+  POST_USER_REQUEST: "POST_USER_REQUEST",
+  POST_USER_SUCCESS: "POST_USER_SUCCESS",
+  POST_USER_ERROR: "POST_USER_ERROR",
 };
 
 export const fetchUsersRequest = () => ({
@@ -29,6 +29,33 @@ export const fetchUsersFailure = (error) => ({
   payload: error,
 });
 
+export const getUserById = (id) => {
+  return function () {
+    const result = db
+      .collection("users")
+      .doc("YpYqQFlaMiZmhAGQDdip")
+      .get()
+      .then((docRef) => {
+        console.log(docRef.data());
+      });
+  };
+};
+
+export const getUsers = () => {
+  return function () {
+    db.collection("users")
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          console.log(doc.id, " => ", doc.data());
+        });
+      })
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
+  };
+};
+
 export const postUser = () => {
   user = {
     gender: "male",
@@ -41,7 +68,7 @@ export const postUser = () => {
     blockedUsers: ["xxxxxxxxxxX", "xxxxxxxxxxY"],
   };
 
-  return function (dispatch) {
+  return function () {
     db.collection("users")
       .add(user)
       .then(function (docRef) {

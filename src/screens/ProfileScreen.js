@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, Image, Platform, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { connect } from "react-redux";
-import { postUser } from "../redux/Actions";
+import { postUser, getUsers, getUserById } from "../redux/Actions";
+import { bindActionCreators } from "redux";
 
 const ProfileScreen = (props) => {
   const [image, setImage] = useState(null);
@@ -46,6 +47,8 @@ const ProfileScreen = (props) => {
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )}
       <Button title="Post user" onPress={() => props.postUser()} />
+      <Button title="Get all users" onPress={() => props.getUsers()} />
+      <Button title="Get user by ID" onPress={() => props.getUserById()} />
     </View>
   );
 };
@@ -55,7 +58,11 @@ const mapStateToProps = (state) => {
   return users;
 };
 
-const mapDispatchToProps = { postUser };
+const mapDispatchToProps = {
+  postUser,
+  getUsers,
+  getUserById,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
 
