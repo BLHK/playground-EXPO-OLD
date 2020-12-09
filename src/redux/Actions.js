@@ -36,7 +36,10 @@ export const getUserById = (id) => {
       .doc("YpYqQFlaMiZmhAGQDdip")
       .get()
       .then((docRef) => {
-        console.log(docRef.data());
+        console.log(docRef.id, " => ", docRef.data());
+      })
+      .catch((error) => {
+        console.log("Error getting user by ID: ", error);
       });
   };
 };
