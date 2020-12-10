@@ -49,6 +49,7 @@ const ProfileScreen = (props) => {
       <Button title="Post user" onPress={() => props.postUser()} />
       <Button title="Get all users" onPress={() => props.getUsers()} />
       <Button title="Get user by ID" onPress={() => props.getUserById()} />
+      <Button title="Press me " onPress={() => console.log(props.users)} />
     </View>
   );
 };

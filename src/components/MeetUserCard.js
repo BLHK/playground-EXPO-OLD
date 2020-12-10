@@ -5,11 +5,10 @@ let cellWidth;
 
 const MeetUserCard = ({ params }) => {
   cellWidth = Dimensions.get("window").width / 3.4;
-
   return (
     <View style={styles.container}>
       <Image
-        source={params.image}
+        source={{ uri: params.images[0] }}
         style={{ height: cellWidth, width: cellWidth, borderRadius: 60 }}
       />
       <Text style={styles.text}>{params.name}</Text>

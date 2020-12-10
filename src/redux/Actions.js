@@ -2,30 +2,31 @@ import { GET_USERS, GENERATE_USER } from "./ActionTypes";
 import axios from "axios";
 import { db, getServerTimeStamp } from "../config/FirebaseConfig";
 
-let firstImage = "/assets/500full-igor-bogdanoff.jpg";
+let firstImage =
+  "https://i.picsum.photos/id/517/200/200.jpg?hmac=7n69zdD4qSZs14zMRZPUfLGKHFEIR9jTpoSEN1o990E";
 // let secondImage = require("https://i.picsum.photos/id/756/150/150.jpg?hmac=A1Rg1RUy9gXoalEUMGE-qTjV3FmO-Fj4rQDtua7HYvU");
 
 export const USERS = {
-  FETCH_USERS_REQUEST: "FETCH_USERS_REQUEST",
-  FETCH_USERS_SUCCESS: "FETCH_USERS_SUCCESS",
-  FETCH_USERS_FAILURE: "FETCH_USERS_FAILURE",
+  GET_USERS_REQUEST: "GET_USERS_REQUEST",
+  GET_USERS_SUCCESS: "GET_USERS_SUCCESS",
+  GET_USERS_FAILURE: "GET_USERS_FAILURE",
 
   POST_USER_REQUEST: "POST_USER_REQUEST",
   POST_USER_SUCCESS: "POST_USER_SUCCESS",
   POST_USER_ERROR: "POST_USER_ERROR",
 };
 
-export const fetchUsersRequest = () => ({
-  type: USERS.START_FETCH,
+export const getUsersRequest = () => ({
+  type: USERS.GET_USERS_REQUEST,
 });
 
-export const fetchUsersSuccess = (users) => ({
-  type: USERS.FETCH_USERS_SUCCESS,
+export const getUsersSuccess = (users) => ({
+  type: USERS.GET_USERS_SUCCESS,
   payload: users,
 });
 
-export const fetchUsersFailure = (error) => ({
-  type: USERS.FETCH_USERS_FAILURE,
+export const getUsersFailure = (error) => ({
+  type: USERS.GET_USERS_FAILURE,
   payload: error,
 });
 
@@ -45,16 +46,21 @@ export const getUserById = (id) => {
 };
 
 export const getUsers = () => {
-  return function () {
+  console.log("getUsers fired---------------------------");
+  return function (dispatch) {
+    dispatch(getUsersRequest());
+    let users = [];
     db.collection("users")
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
-          console.log(doc.id, " => ", doc.data());
+          users.push({ id: doc.id, user: doc.data() });
         });
+        dispatch(getUsersSuccess(users));
       })
       .catch(function (error) {
         console.log("Error getting documents: ", error);
+        dispatch(getUsersFailure());
       });
   };
 };

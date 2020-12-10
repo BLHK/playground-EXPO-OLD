@@ -9,11 +9,11 @@ const initialState = {
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case USERS.FETCH_USERS_REQUEST:
+    case USERS.GET_USERS_REQUEST:
       return { ...state, loading: true };
-    case USERS.FETCH_USERS_SUCCESS:
+    case USERS.GET_USERS_SUCCESS:
       return { loading: false, users: action.payload, error: null };
-    case USERS.FETCH_USERS_FAILURE:
+    case USERS.GET_USERS_FAILURE:
       return { loading: false, error: action.payload };
     default:
       return state;
