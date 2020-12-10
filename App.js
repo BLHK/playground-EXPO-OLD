@@ -6,13 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./src/redux/Store";
-
-import MeetScreen from "./src/screens/MeetScreen";
-import MessagesScreen from "./src/screens/MessagesScreen";
-import ProfileScreen from "./src/screens/ProfileScreen";
-import CameraScreen from "./src/screens/CameraScreen";
-import ChatScreen from "./src/screens/ChatScreen";
-import UserScreen from "./src/screens/UserScreen";
+import { Screens } from "./src/Imports";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -24,15 +18,15 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Tabs" component={TabNavigator} />
-            <Stack.Screen name="Camera" component={CameraScreen} />
+            <Stack.Screen name="Camera" component={Screens.Camera} />
             <Stack.Screen
               name="User"
-              component={UserScreen}
+              component={Screens.User}
               options={{ headerShown: true }}
             />
             <Stack.Screen
               name="ChatScreen"
-              component={ChatScreen}
+              component={Screens.Chat}
               options={{ headerShown: true }}
             />
           </Stack.Navigator>
@@ -45,9 +39,9 @@ export default function App() {
 const TabNavigator = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Meet" component={MeetScreen} />
-      <Tab.Screen name="MessagesScreen" component={MessagesScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Meet" component={Screens.Meet} />
+      <Tab.Screen name="MessagesScreen" component={Screens.Messages} />
+      <Tab.Screen name="Profile" component={Screens.Profile} />
     </Tab.Navigator>
   );
 };
