@@ -5,9 +5,12 @@ const ConversationCard = ({ params }) => {
   return (
     <View style={styles.background}>
       <View style={styles.conversationCard}>
-        <Image style={styles.profilePicture} source={{ uri: params.image }} />
+        <Image
+          style={styles.profilePicture}
+          source={{ uri: params.user.images[0] }}
+        />
         <View style={styles.textContainer}>
-          <Text style={styles.nameField}>{params.name} </Text>
+          <Text style={styles.nameField}>{params.user.name} </Text>
           <View style={styles.messageContainer}>
             <Text numberOfLines={1}>{params.message}</Text>
           </View>
@@ -36,7 +39,8 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-evenly",
+    marginHorizontal: 10,
   },
   profilePicture: {
     width: 70,
