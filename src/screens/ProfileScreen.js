@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Button, Image, Platform, StyleSheet } from "react-native";
+import { View, Button, Image, Platform, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { connect } from "react-redux";
 import { postUser, getUsers, getUserById } from "../redux/Actions";
-import { bindActionCreators } from "redux";
 
 const ProfileScreen = (props) => {
   const [image, setImage] = useState(null);

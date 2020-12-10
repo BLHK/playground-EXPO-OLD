@@ -4,8 +4,6 @@ import {
   SafeAreaView,
   TouchableOpacity,
   StyleSheet,
-  Button,
-  View,
 } from "react-native";
 import { connect } from "react-redux";
 import { getUsers } from "../redux/Actions";
