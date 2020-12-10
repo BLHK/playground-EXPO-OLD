@@ -26,9 +26,7 @@ const MeetScreen = (props) => {
         numColumns={3}
         columnWrapperStyle={styles.flatListStyle}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("Conversation")}
-          >
+          <TouchableOpacity onPress={() => props.navigation.navigate("User")}>
             <MeetUserCard params={item.user} />
           </TouchableOpacity>
         )}

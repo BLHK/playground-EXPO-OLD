@@ -12,6 +12,7 @@ import MessagesScreen from "./src/screens/MessagesScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import CameraScreen from "./src/screens/CameraScreen";
 import ChatScreen from "./src/screens/ChatScreen";
+import UserScreen from "./src/screens/UserScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -24,6 +25,11 @@ export default function App() {
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Tabs" component={TabNavigator} />
             <Stack.Screen name="Camera" component={CameraScreen} />
+            <Stack.Screen
+              name="User"
+              component={UserScreen}
+              options={{ headerShown: true }}
+            />
             <Stack.Screen
               name="ChatScreen"
               component={ChatScreen}
