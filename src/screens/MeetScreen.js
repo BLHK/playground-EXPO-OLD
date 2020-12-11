@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { getUsers } from "../redux/ActionCreators/UserActions";
+import { openModal, closeModal } from "../redux/ActionCreators/ModalActions";
 import MeetUserCard from "../components/MeetUserCard";
 
 const MeetScreen = (props) => {
@@ -17,6 +18,7 @@ const MeetScreen = (props) => {
   //     props.getUsers();
   //   } //Will get stuck if there's no users in db.
   // });
+  console.log(props.modalActive);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -26,7 +28,7 @@ const MeetScreen = (props) => {
         numColumns={3}
         columnWrapperStyle={styles.flatListStyle}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => props.navigation.navigate("User")}>
+          <TouchableOpacity onPress={() => setModalActive()}>
             <MeetUserCard params={item.user} />
           </TouchableOpacity>
         )}
@@ -37,8 +39,9 @@ const MeetScreen = (props) => {
 };
 
 function mapStateToProps(state) {
-  const { users } = state;
-  return users;
+  const users = state.users.users;
+  const modalActive = state.modal.modalActive;
+  return { users, modalActive };
 }
 
 const mapDispatchToProps = {
