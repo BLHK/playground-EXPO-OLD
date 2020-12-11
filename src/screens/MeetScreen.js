@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { getUsers } from "../redux/ActionCreators/UserActions";
 import { openModal, closeModal } from "../redux/ActionCreators/ModalActions";
 import MeetUserCard from "../components/MeetUserCard";
+import UserModal from "../components/UserModal";
 
 const MeetScreen = (props) => {
   //Code for only running at startup. Dont wanna spam requests, so leaving this commented now.
@@ -28,12 +29,13 @@ const MeetScreen = (props) => {
         numColumns={3}
         columnWrapperStyle={styles.flatListStyle}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => setModalActive()}>
+          <TouchableOpacity onPress={() => openModal(item)}>
             <MeetUserCard params={item.user} />
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item.id.toString()}
       />
+      <UserModal />
     </SafeAreaView>
   );
 };
@@ -46,6 +48,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   getUsers,
+  openModal,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MeetScreen);

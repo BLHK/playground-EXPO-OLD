@@ -1,33 +1,38 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, Modal } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Modal,
+  TouchableHighlight,
+} from "react-native";
 
 const UserModal = (params) => {
   return (
     <View>
-      <Modal>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={params.modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={params.modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello World!</Text>
 
-              <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              >
-                <Text style={styles.textStyle}>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
+            <TouchableHighlight
+              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              onPress={() => {
+                // setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </TouchableHighlight>
           </View>
-        </Modal>
+        </View>
       </Modal>
     </View>
   );
