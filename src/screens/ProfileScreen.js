@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { View, Button, Image, Platform, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { connect } from "react-redux";
-import { postUser, getUsers, getUserById } from "../redux/Actions";
+import {
+  postUser,
+  getUsers,
+  getUserById,
+} from "../redux/ActionCreators/UserActions";
 import { setModalActive } from "../redux/ActionCreators/ModalActions";
 
 const ProfileScreen = (props) => {

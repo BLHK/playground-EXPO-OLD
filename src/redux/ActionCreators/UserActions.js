@@ -1,6 +1,6 @@
-import { GET_USERS, GENERATE_USER } from "./ActionTypes";
+import { GET_USERS, GENERATE_USER } from "../ActionTypes";
 import axios from "axios";
-import { db, getServerTimeStamp } from "../FirebaseConfig";
+import { db, getServerTimeStamp } from "../../FirebaseConfig";
 
 let firstImage =
   "https://i.picsum.photos/id/517/200/200.jpg?hmac=7n69zdD4qSZs14zMRZPUfLGKHFEIR9jTpoSEN1o990E";

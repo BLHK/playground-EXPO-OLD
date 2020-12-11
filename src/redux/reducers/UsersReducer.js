@@ -1,5 +1,5 @@
 import { GET_USERS, GENERATE_USER } from "../ActionTypes";
-import { USERS } from "../Actions";
+import { USERS } from "../ActionCreators/UserActions";
 
 const initialState = {
   loading: false,

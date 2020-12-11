@@ -6,7 +6,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { connect } from "react-redux";
-import { getUsers } from "../redux/Actions";
+import { getUsers } from "../redux/ActionCreators/UserActions";
 import MeetUserCard from "../components/MeetUserCard";
 
 const MeetScreen = (props) => {
