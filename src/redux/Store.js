@@ -8,10 +8,8 @@ import rootReducer from "./reducers";
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
-
-  // whitelist: [    // or blacklist if you don't want to save the reducer
-  //   'authReducer',
-  // ],
+  whitelist: ["users"],
+  blacklist: ["modal"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

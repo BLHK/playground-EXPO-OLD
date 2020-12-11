@@ -3,6 +3,7 @@ import { View, Button, Image, Platform, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { connect } from "react-redux";
 import { postUser, getUsers, getUserById } from "../redux/Actions";
+import { setModalActive } from "../redux/ActionCreators/ModalActions";
 
 const ProfileScreen = (props) => {
   const [image, setImage] = useState(null);
@@ -48,7 +49,7 @@ const ProfileScreen = (props) => {
       <Button title="Post user" onPress={() => props.postUser()} />
       <Button title="Get all users" onPress={() => props.getUsers()} />
       <Button title="Get user by ID" onPress={() => props.getUserById()} />
-      <Button title="Press me " onPress={() => console.log(props.users)} />
+      <Button title="Check modal state" onPress={() => setModalActive(true)} />
     </View>
   );
 };
@@ -62,6 +63,7 @@ const mapDispatchToProps = {
   postUser,
   getUsers,
   getUserById,
+  setModalActive,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
