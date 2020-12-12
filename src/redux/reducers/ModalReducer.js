@@ -10,7 +10,7 @@ const modalReducer = (state = initialState, action) => {
     case MODAL.OPEN_MODAL:
       return { modalActive: true, currentUser: action.payload };
     case MODAL.CLOSE_MODAL:
-      return { ...state, modalActive: false };
+      return { modalActive: false, currentUser: {} };
     default:
       return state;
   }

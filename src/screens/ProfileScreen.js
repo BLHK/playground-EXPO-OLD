@@ -8,7 +8,7 @@ import {
   getUsers,
   getUserById,
 } from "../redux/ActionCreators/UserActions";
-import { closeModal } from "../redux/ActionCreators/ModalActions";
+import { openModal, closeModal } from "../redux/ActionCreators/ModalActions";
 
 const ProfileScreen = (props) => {
   const [image, setImage] = useState(null);
@@ -54,7 +54,8 @@ const ProfileScreen = (props) => {
       <Button title="Post user" onPress={() => props.postUser()} />
       <Button title="Get all users" onPress={() => props.getUsers()} />
       <Button title="Get user by ID" onPress={() => props.getUserById()} />
-      <Button title="Close modal" onPress={() => closeModal()} />
+      <Button title="Open modal" onPress={() => props.openModal()} />
+      <Button title="Close modal" onPress={() => props.closeModal()} />
       <Button
         title="Check modal state"
         onPress={() => console.log(props.modalActive)}
@@ -73,6 +74,7 @@ const mapDispatchToProps = {
   postUser,
   getUsers,
   getUserById,
+  openModal,
   closeModal,
 };
 

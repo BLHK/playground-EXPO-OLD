@@ -1,9 +1,10 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 import ReduxThunk from "redux-thunk";
-import rootReducer from "./reducers";
+import rootReducer from "./reducers/index";
 
 function logger({ getState }) {
   return (next) => (action) => {
@@ -24,13 +25,9 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const middleware = applyMiddleware(ReduxThunk, logger);
 
-const store = createStore(
-  persistedReducer,
-  composeEnhancer(applyMiddleware(ReduxThunk, logger))
-  //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const store = createStore(persistedReducer, composeWithDevTools(middleware));
 
 let persistor = persistStore(store);
 
