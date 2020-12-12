@@ -13,3 +13,7 @@ export const Screens = {
   Messages: MessagesScreen,
   Profile: ProfileScreen,
 };
+
+export const COLORS = {
+  YELLOW: "#F0B321",
+};
