@@ -16,4 +16,5 @@ export const Screens = {
 
 export const COLORS = {
   YELLOW: "#F0B321",
+  FONT: "Noto Sans, google fonts",
 };
