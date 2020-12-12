@@ -35,7 +35,7 @@ const MeetScreen = (props) => {
         )}
         keyExtractor={(item) => item.id.toString()}
       />
-      <UserModal />
+      {/* <UserModal /> */}
     </SafeAreaView>
   );
 };

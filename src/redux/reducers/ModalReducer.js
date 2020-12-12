@@ -1,7 +1,7 @@
 import { MODAL } from "../ActionCreators/ModalActions";
 
 const initialState = {
-  modalActive: false,
+  modalActive: true,
   currentUser: {},
 };
 
@@ -10,7 +10,7 @@ const modalReducer = (state = initialState, action) => {
     case MODAL.OPEN_MODAL:
       return { modalActive: true, currentUser: action.payload };
     case MODAL.CLOSE_MODAL:
-      return { modalActive: false, currentUser: {} };
+      return { ...state, modalActive: false };
     default:
       return state;
   }

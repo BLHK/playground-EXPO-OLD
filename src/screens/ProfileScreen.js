@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { View, Button, Image, Platform, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import {
   postUser,
   getUsers,
   getUserById,
 } from "../redux/ActionCreators/UserActions";
-import { setModalActive } from "../redux/ActionCreators/ModalActions";
+import { closeModal } from "../redux/ActionCreators/ModalActions";
 
 const ProfileScreen = (props) => {
   const [image, setImage] = useState(null);
@@ -53,21 +54,26 @@ const ProfileScreen = (props) => {
       <Button title="Post user" onPress={() => props.postUser()} />
       <Button title="Get all users" onPress={() => props.getUsers()} />
       <Button title="Get user by ID" onPress={() => props.getUserById()} />
-      <Button title="Check modal state" onPress={() => setModalActive(true)} />
+      <Button title="Close modal" onPress={() => closeModal()} />
+      <Button
+        title="Check modal state"
+        onPress={() => console.log(props.modalActive)}
+      />
     </View>
   );
 };
 
 const mapStateToProps = (state) => {
-  const { users } = state;
-  return users;
+  const users = state.users.users;
+  const modalActive = state.modal.modalActive;
+  return { users, modalActive };
 };
 
 const mapDispatchToProps = {
   postUser,
   getUsers,
   getUserById,
-  setModalActive,
+  closeModal,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);

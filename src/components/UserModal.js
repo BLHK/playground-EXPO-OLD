@@ -8,13 +8,22 @@ import {
   TouchableHighlight,
 } from "react-native";
 
+import { connect } from "react-redux";
+import { closeModal } from "../redux/ActionCreators/ModalActions";
+
 const UserModal = (params) => {
+  const fireEvent = () => {
+    console.log("First:", params.modalActive);
+    closeModal();
+    console.log("Second:", params.modalActive);
+  };
+
   return (
     <View>
       <Modal
         animationType="slide"
         transparent={true}
-        visible={params.modalVisible}
+        visible={params.modalActive}
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
         }}
@@ -26,7 +35,7 @@ const UserModal = (params) => {
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
               onPress={() => {
-                // setModalVisible(!modalVisible);
+                fireEvent();
               }}
             >
               <Text style={styles.textStyle}>Hide Modal</Text>
@@ -37,6 +46,18 @@ const UserModal = (params) => {
     </View>
   );
 };
+
+function mapStateToProps(state) {
+  // const users = state.users.users;
+  const modalActive = state.modal.modalActive;
+  return { modalActive };
+}
+
+const mapDispatchToProps = {
+  closeModal,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserModal);
 
 const styles = StyleSheet.create({
   container: {
@@ -79,5 +100,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-
-export default UserModal;
