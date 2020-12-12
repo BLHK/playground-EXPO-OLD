@@ -6,7 +6,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./src/redux/Store";
-import { Screens } from "./src/Imports";
+import { Screens, COLORS } from "./src/Imports";
+
+import { FontAwesome5 } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -38,7 +41,46 @@ export default function App() {
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let highlightColor = focused
+            ? (color = COLORS.YELLOW)
+            : COLORS.INACTIVE;
+
+          switch (route.name) {
+            case "Meet":
+              return (
+                <FontAwesome5
+                  name="user-friends"
+                  size={size}
+                  color={highlightColor}
+                />
+              );
+            case "MessagesScreen":
+              return (
+                <Ionicons
+                  name="md-chatboxes"
+                  size={32}
+                  color={highlightColor}
+                />
+              );
+            case "Profile":
+              return (
+                <FontAwesome5
+                  name="user-alt"
+                  size={size}
+                  color={highlightColor}
+                />
+              );
+          }
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: COLORS.YELLOW,
+        inactiveTintColor: COLORS.INACTIVE,
+      }}
+    >
       <Tab.Screen name="Meet" component={Screens.Meet} />
       <Tab.Screen name="MessagesScreen" component={Screens.Messages} />
       <Tab.Screen name="Profile" component={Screens.Profile} />

@@ -16,5 +16,6 @@ export const Screens = {
 
 export const COLORS = {
   YELLOW: "#F0B321",
+  INACTIVE: "#CCCCCC",
   FONT: "Noto Sans, google fonts",
 };
