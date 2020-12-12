@@ -11,19 +11,13 @@ import {
 import { connect } from "react-redux";
 import { closeModal } from "../redux/ActionCreators/ModalActions";
 
-const UserModal = (params) => {
-  const fireEvent = () => {
-    console.log("First:", params.modalActive);
-    closeModal();
-    console.log("Second:", params.modalActive);
-  };
-
+const UserModal = (props) => {
   return (
     <View>
       <Modal
         animationType="slide"
         transparent={true}
-        visible={params.modalActive}
+        visible={props.modalActive}
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
         }}
@@ -35,7 +29,7 @@ const UserModal = (params) => {
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
               onPress={() => {
-                fireEvent();
+                props.closeModal();
               }}
             >
               <Text style={styles.textStyle}>Hide Modal</Text>
@@ -48,7 +42,6 @@ const UserModal = (params) => {
 };
 
 function mapStateToProps(state) {
-  // const users = state.users.users;
   const modalActive = state.modal.modalActive;
   return { modalActive };
 }

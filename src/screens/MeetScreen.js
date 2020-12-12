@@ -19,7 +19,6 @@ const MeetScreen = (props) => {
   //     props.getUsers();
   //   } //Will get stuck if there's no users in db.
   // });
-  console.log(props.modalActive);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,13 +28,13 @@ const MeetScreen = (props) => {
         numColumns={3}
         columnWrapperStyle={styles.flatListStyle}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => openModal(item)}>
+          <TouchableOpacity onPress={() => props.openModal(item)}>
             <MeetUserCard params={item.user} />
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item.id.toString()}
       />
-      {/* <UserModal /> */}
+      <UserModal />
     </SafeAreaView>
   );
 };

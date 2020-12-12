@@ -1,4 +1,3 @@
-import { GET_USERS, GENERATE_USER } from "../ActionTypes";
 import axios from "axios";
 import { db, getServerTimeStamp } from "../../FirebaseConfig";
 

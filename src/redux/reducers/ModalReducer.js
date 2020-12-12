@@ -1,7 +1,7 @@
 import { MODAL } from "../ActionCreators/ModalActions";
 
 const initialState = {
-  modalActive: true,
+  modalActive: false,
   currentUser: {},
 };
 
