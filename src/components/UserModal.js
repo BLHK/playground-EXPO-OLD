@@ -6,12 +6,42 @@ import {
   StyleSheet,
   Modal,
   TouchableHighlight,
+  Dimensions,
 } from "react-native";
 
 import { connect } from "react-redux";
 import { closeModal } from "../redux/ActionCreators/ModalActions";
 
+const modalHeight = Math.round(Dimensions.get("window").height * 0.85);
+const modalWidth = Math.round(Dimensions.get("window").width * 0.85);
+
 const UserModal = (props) => {
+  const ModalContent = () => {
+    if(props.modalActive){
+      return (
+        <View style={styles.modalContent}>
+          <Image
+            source={{ uri: props.currentUser.user.images[0] }}
+            style={styles.image}
+          />
+          <Text>{props.currentUser.user.name}</Text>
+          <TouchableHighlight
+            style={styles.openButton}
+            onPress={() => {
+              props.closeModal();
+            }}
+          >
+            <Text style={styles.textStyle}>Hide Modal</Text>
+          </TouchableHighlight>
+        </View>
+      );
+    }else {
+      return (
+        <View></View>
+      )
+    }
+  } 
+
   return (
     <View>
       <Modal
@@ -24,16 +54,7 @@ const UserModal = (props) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>YAYAYAYAYA</Text>
-
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={() => {
-                props.closeModal();
-              }}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </TouchableHighlight>
+            <ModalContent />
           </View>
         </View>
       </Modal>
@@ -43,7 +64,8 @@ const UserModal = (props) => {
 
 function mapStateToProps(state) {
   const modalActive = state.modal.modalActive;
-  return { modalActive };
+  const currentUser = state.modal.currentUser;
+  return { modalActive, currentUser };
 }
 
 const mapDispatchToProps = {
@@ -55,18 +77,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(UserModal);
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-end",
     alignItems: "center",
-    marginTop: 22,
   },
   modalView: {
     margin: 20,
     backgroundColor: "white",
-    height: "40%",
-    width: "80%",
+    overflow: "hidden",
+    height: modalHeight,
+    width: modalWidth,
     borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -76,8 +96,14 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
+  modalContent: {
+  },
+  image: {
+    width: modalWidth,
+    height: modalWidth,
+  },
   openButton: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "#2196F3",
     borderRadius: 20,
     padding: 10,
     elevation: 2,
