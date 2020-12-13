@@ -64,7 +64,7 @@ const TabNavigator = () => {
                   color={highlightColor}
                 />
               );
-            case "MessagesScreen":
+            case "Chat":
               return (
                 <Ionicons
                   name="md-chatboxes"
@@ -89,7 +89,7 @@ const TabNavigator = () => {
       }}
     >
       <Tab.Screen name="Meet" component={MeetScreen} />
-      <Tab.Screen name="MessagesScreen" component={MessagesScreen} />
+      <Tab.Screen name="Chat" component={MessagesScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
