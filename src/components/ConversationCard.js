@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   conversationCard: {
     flex: 1,
-    backgroundColor: COLORS.PRIMARY,
+    backgroundColor: "#00dede",
     flexDirection: "row",
     flexWrap: "wrap",
     borderRadius: 20,
