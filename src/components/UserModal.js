@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
   modalView: {
     margin: 20,
     backgroundColor: "white",
-    overflow: "hidden",
     height: modalHeight,
     width: modalWidth,
     borderRadius: 20,
@@ -99,6 +98,8 @@ const styles = StyleSheet.create({
   modalContent: {
   },
   image: {
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     width: modalWidth,
     height: modalWidth,
   },
