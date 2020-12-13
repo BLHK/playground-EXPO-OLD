@@ -45,7 +45,7 @@ const TabNavigator = () => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let highlightColor = focused
-            ? (color = COLORS.YELLOW)
+            ? (color = COLORS.PRIMARY)
             : COLORS.INACTIVE;
 
           switch (route.name) {
@@ -77,7 +77,7 @@ const TabNavigator = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: COLORS.YELLOW,
+        activeTintColor: COLORS.PRIMARY,
         inactiveTintColor: COLORS.INACTIVE,
       }}
     >

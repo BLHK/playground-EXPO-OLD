@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
+import { COLORS } from "../Imports";
 
 const ConversationCard = ({ params }) => {
   return (
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
   },
   conversationCard: {
     flex: 1,
-    backgroundColor: "#f9c2ff",
+    backgroundColor: COLORS.PRIMARY,
     flexDirection: "row",
     flexWrap: "wrap",
     borderRadius: 20,
