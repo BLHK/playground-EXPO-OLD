@@ -6,7 +6,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./src/redux/Store";
-import { Screens, COLORS } from "./src/Imports";
+import { COLORS } from "./src/Imports";
+
+import UserScreen from "./src/screens/UserScreen";
+import CameraScreen from "./src/screens/CameraScreen";
+import ChatScreen from "./src/screens/ChatScreen";
+import MeetScreen from "./src/screens/MeetScreen";
+import MessagesScreen from "./src/screens/MessagesScreen";
+import ProfileScreen from "./src/screens/ProfileScreen";
 
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -21,15 +28,15 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Tabs" component={TabNavigator} />
-            <Stack.Screen name="Camera" component={Screens.Camera} />
+            <Stack.Screen name="Camera" component={CameraScreen} />
             <Stack.Screen
               name="User"
-              component={Screens.User}
+              component={UserScreen}
               options={{ headerShown: true }}
             />
             <Stack.Screen
               name="ChatScreen"
-              component={Screens.Chat}
+              component={ChatScreen}
               options={{ headerShown: true }}
             />
           </Stack.Navigator>
@@ -81,9 +88,9 @@ const TabNavigator = () => {
         inactiveTintColor: COLORS.INACTIVE,
       }}
     >
-      <Tab.Screen name="Meet" component={Screens.Meet} />
-      <Tab.Screen name="MessagesScreen" component={Screens.Messages} />
-      <Tab.Screen name="Profile" component={Screens.Profile} />
+      <Tab.Screen name="Meet" component={MeetScreen} />
+      <Tab.Screen name="MessagesScreen" component={MessagesScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 };
