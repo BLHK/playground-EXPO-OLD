@@ -7,6 +7,8 @@ import {
   Modal,
   TouchableHighlight,
   Dimensions,
+  SafeAreaView,
+  ScrollView
 } from "react-native";
 
 import { connect } from "react-redux";
@@ -19,7 +21,18 @@ const UserModal = (props) => {
   const ModalContent = () => {
     if(props.modalActive){
       return (
+
+  <SafeAreaView style={styles.container}>
+  <ScrollView bounces={false}>
         <View style={styles.modalContent}>
+          <Image
+            source={{ uri: props.currentUser.user.images[0] }}
+            style={styles.image}
+          />
+          <Image
+            source={{ uri: props.currentUser.user.images[0] }}
+            style={styles.image}
+          />
           <Image
             source={{ uri: props.currentUser.user.images[0] }}
             style={styles.image}
@@ -34,6 +47,8 @@ const UserModal = (props) => {
             <Text style={styles.textStyle}>Hide Modal</Text>
           </TouchableHighlight>
         </View>
+      </ScrollView>
+    </SafeAreaView>
       );
     }else {
       return (
@@ -46,7 +61,7 @@ const UserModal = (props) => {
     <View>
       <Modal
         animationType="slide"
-        transparent={true}
+        transparent={false}
         visible={props.modalActive}
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
@@ -75,6 +90,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(UserModal);
 
 const styles = StyleSheet.create({
+  container: {flex: 1},
   centeredView: {
     flex: 1,
     justifyContent: "flex-end",
@@ -83,6 +99,7 @@ const styles = StyleSheet.create({
   modalView: {
     margin: 20,
     backgroundColor: "white",
+    overflow: "scroll",
     height: modalHeight,
     width: modalWidth,
     borderRadius: 20,
@@ -98,8 +115,6 @@ const styles = StyleSheet.create({
   modalContent: {
   },
   image: {
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
     width: modalWidth,
     height: modalWidth,
   },
