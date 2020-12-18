@@ -25,7 +25,7 @@ const UserModal = (props) => {
       return (
 
   <SafeAreaView style={styles.container}>
-  <ScrollView bounces={false}>
+  <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
         <View style={styles.modalContent}>
           <Image
             source={{ uri: props.currentUser.user.images[0] }}
