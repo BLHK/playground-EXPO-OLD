@@ -15,11 +15,15 @@ import MeetScreen from "./src/screens/MeetScreen";
 import MessagesScreen from "./src/screens/MessagesScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 
+import SignInScreen from './src/screens/authentication/SignInScreen';
+
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
+let isSignedIn = false;
 
 export default function App() {
   return (
@@ -27,23 +31,38 @@ export default function App() {
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Tabs" component={TabNavigator} />
-            <Stack.Screen name="Camera" component={CameraScreen} />
-            <Stack.Screen
-              name="User"
-              component={UserScreen}
-              options={{ headerShown: true }}
-            />
-            <Stack.Screen
-              name="ChatScreen"
-              component={ChatScreen}
-              options={{ headerShown: true }}
-            />
+
+            {isSignedIn == false ? (
+                <Stack.Screen name="Authentication" component={AuthNavigator}/>
+            ) : (
+              <>
+              <Stack.Screen name="Tabs" component={TabNavigator} />
+              <Stack.Screen name="Camera" component={CameraScreen} />
+              <Stack.Screen
+                name="User"
+                component={UserScreen}
+                options={{ headerShown: true }}
+              />
+              <Stack.Screen
+                name="ChatScreen"
+                component={ChatScreen}
+                options={{ headerShown: true }}
+              />
+              </>
+            )}
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>
     </Provider>
   );
+}
+
+const AuthNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="SignIn" component={SignInScreen} />
+    </Stack.Navigator>
+  )
 }
 
 const TabNavigator = () => {
