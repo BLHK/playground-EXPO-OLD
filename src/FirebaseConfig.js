@@ -1,14 +1,23 @@
 import * as firebase from "firebase";
 import "firebase/firestore";
+import {
+  API_KEY,
+  AUTH_DOMAIN,
+  DATABASE_URL,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+  MESSAGE_SENDER_ID,
+  APP_ID
+} from '@env';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAS0DrBy83DboPgaZq0Ue--k2b6YNNGsgA",
-  authDomain: "playground-expo.firebaseapp.com",
-  databaseURL: "https://playground-expo.firebaseio.com",
-  projectId: "playground-expo",
-  storageBucket: "playground-expo.appspot.com",
-  messagingSenderId: "745612227818",
-  appId: "1:745612227818:web:2308d59f9f343f4df41393",
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  databaseURL: DATABASE_URL,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGE_SENDER_ID,
+  appId: APP_ID,
 };
 
 if (firebase.apps.length === 0) {
