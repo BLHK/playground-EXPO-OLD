@@ -6,6 +6,8 @@ import {
   StyleSheet,
   Modal,
   TouchableHighlight,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
   Dimensions,
   SafeAreaView,
   ScrollView
@@ -14,8 +16,8 @@ import {
 import { connect } from "react-redux";
 import { closeModal } from "../redux/ActionCreators/ModalActions";
 
-const modalHeight = Math.round(Dimensions.get("window").height * 0.85);
-const modalWidth = Math.round(Dimensions.get("window").width * 0.85);
+const modalHeight = Math.round(Dimensions.get("window").height);
+const modalWidth = Math.round(Dimensions.get("window").width);
 
 const UserModal = (props) => {
   const ModalContent = () => {
@@ -59,20 +61,28 @@ const UserModal = (props) => {
 
   return (
     <View>
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={props.modalActive}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <ModalContent />
-          </View>
-        </View>
-      </Modal>
+      
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={props.modalActive}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+          }}
+        >
+            <TouchableOpacity style={{height: modalHeight*0.155, width: modalWidth}} onPress={() => props.closeModal()}></TouchableOpacity>
+              <View style={{ flexDirection: "row", justifyContent: "space-between"}}>
+                <TouchableOpacity style={{width: modalWidth*0.15, height: modalHeight*0.8, alignItems: 'flex-start'} } onPress={() => props.closeModal()}></TouchableOpacity>
+                <TouchableOpacity style={{width: modalWidth*0.15, height: modalHeight*0.8, alignItems: 'flex-start'} } onPress={() => props.closeModal()}></TouchableOpacity>
+              </View>
+            <TouchableOpacity style={{height: modalHeight*0.05, width: modalWidth* 2}} onPress={() => props.closeModal()}></TouchableOpacity>
+          
+            <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <ModalContent />
+                </View>
+            </View>
+        </Modal>
     </View>
   );
 };
@@ -97,11 +107,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalView: {
-    margin: 20,
     backgroundColor: "white",
     overflow: "scroll",
-    height: modalHeight,
-    width: modalWidth,
+    height: modalHeight *0.85,
+    width: modalWidth * 0.85,
     borderRadius: 20,
     shadowColor: "#000",
     shadowOffset: {
