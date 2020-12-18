@@ -1,38 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 const SignUp = (props) => {
-  // state = {
-  //     name: '',
-  //     email: '',
-  //     password: ''
-  // }
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
   return (
   <View style={styles.container}>
     <TextInput
       style={styles.inputBox}
-      // value={this.state.name}
-      // onChangeText={name => this.setState({ name })}
-      placeholder='Full Name'
-    />
-    <TextInput
-      style={styles.inputBox}
-      // value={this.state.email}
-      // onChangeText={email => this.setState({ email })}
+      onChangeText={email => setEmail(email)}
+      defaultValue={email}
       placeholder='Email'
-      autoCapitalize='none'
     />
     <TextInput
       style={styles.inputBox}
-      // value={this.state.password}
-      // onChangeText={password => this.setState({ password })}
+      onChangeText={password => setPassword(password)}
+      defaultValue={password}
       placeholder='Password'
       secureTextEntry={true}
     />
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={() => console.log(password)}>
       <Text style={styles.buttonText}>Signup</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={{...styles.button, backgroundColor: 'red'}}>
+    <TouchableOpacity style={{...styles.button, backgroundColor: 'red'}} 
+    onPress={() => props.navigation.goBack()}>
       <Text style={styles.buttonText}>Back</Text>
     </TouchableOpacity>
   </View>
