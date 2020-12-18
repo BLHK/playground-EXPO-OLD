@@ -1,14 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, TouchableOpacity, Text, Button} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import {connect} from 'react-redux';
 
 const SignInScreen = (props) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return(
     <View style={styles.container}>
-      <TextInput style={styles.inputBox} placeholder="Email" />
-      <TextInput style={styles.inputBox} placeholder="Password" secureTextEntry={true}/>
-      <TouchableOpacity style={styles.button}>
+      <TextInput style={styles.inputBox} 
+        placeholder="Email"
+        onChangeText={email => setEmail(email)}
+        defaultValue={email} />
+      <TextInput style={styles.inputBox}
+        placeholder="Password" 
+        onChangeText={password => setPassword(password)}
+        defaultValue={password}
+        secureTextEntry={true}/>
+      <TouchableOpacity style={styles.button} onPress={() => console.log(password)}>
           <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <Button title="Don't have an account yet? Sign up" onPress={() => props.navigation.navigate("SignUp")}/>
