@@ -7,7 +7,6 @@ import {
   Modal,
   TouchableHighlight,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   Dimensions,
   SafeAreaView,
   ScrollView
