@@ -1,10 +1,28 @@
 import React, {useState} from 'react';
 import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import Firebase from "../../FirebaseConfig";
+
+
 
 const SignUp = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+
+  const handleSignUp = () => {
+    Firebase.auth().createUserWithEmailAndPassword(email, password)
+    .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode == 'auth/weak-password') {
+        alert('The password is too weak.');
+      } else {
+        console.log("ErrorMessage: ", errorMessage);
+      }
+      console.log("Error: ", error);
+    });
+  }
+
   return (
   <View style={styles.container}>
     <TextInput
@@ -20,7 +38,7 @@ const SignUp = (props) => {
       placeholder='Password'
       secureTextEntry={true}
     />
-    <TouchableOpacity style={styles.button} onPress={() => console.log(password)}>
+    <TouchableOpacity style={styles.button} onPress={() => handleSignUp(email, password)}>
       <Text style={styles.buttonText}>Signup</Text>
     </TouchableOpacity>
     <TouchableOpacity style={{...styles.button, backgroundColor: 'red'}} 

@@ -20,9 +20,13 @@ const firebaseConfig = {
   appId: APP_ID,
 };
 
+
+let Firebase;
 if (firebase.apps.length === 0) {
-  firebase.initializeApp(firebaseConfig);
+  Firebase = firebase.initializeApp(firebaseConfig);
 }
+
+export default Firebase;
 
 export const db = firebase.firestore();
 
