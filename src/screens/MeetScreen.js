@@ -6,7 +6,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { connect } from "react-redux";
-import { getUsers } from "../redux/ActionCreators/UserActions";
+import { getUsers } from "../redux/ActionCreators/UsersActions";
 import { openModal } from "../redux/ActionCreators/ModalActions";
 import MeetUserCard from "../components/MeetUserCard";
 import UserModal from "../components/UserModal";

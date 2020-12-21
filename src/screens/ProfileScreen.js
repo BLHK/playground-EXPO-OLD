@@ -7,7 +7,7 @@ import {
   postUser,
   getUsers,
   getUserById,
-} from "../redux/ActionCreators/UserActions";
+} from "../redux/ActionCreators/UsersActions";
 import { openModal, closeModal } from "../redux/ActionCreators/ModalActions";
 
 const ProfileScreen = (props) => {

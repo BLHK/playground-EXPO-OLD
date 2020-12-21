@@ -1,4 +1,4 @@
-import { USERS } from "../ActionCreators/UserActions";
+import { USERS } from "../ActionCreators/UsersActions";
 
 const initialState = {
   loading: false,
