@@ -13,7 +13,7 @@ export const updateEmail = (email) => ({
   payload: email,
 });
 
-export const updatePassword = (password) = ({
+export const updatePassword = (password) => ({
   type: USER.UPDATE_PASSWORD,
   payload: password,
 });
