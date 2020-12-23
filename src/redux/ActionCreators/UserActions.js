@@ -17,10 +17,9 @@ export const updatePassword = (password) => ({
   payload: password,
 });
 
-export const login = () => {
-  return async (dispatch, getState) => {
+export const login = (email, password) => {
+  return async (dispatch) => {
     try{
-      const { email, password } = getState().user;
       const response = await Firebase.auth().signInWithEmailAndPassword(email,password);
       dispatch({type: USER.LOGIN, payload: response.user});
     }catch(e) {
