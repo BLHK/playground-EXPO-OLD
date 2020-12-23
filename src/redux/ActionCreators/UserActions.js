@@ -1,4 +1,4 @@
-import Firebase from "../../FirebaseConfig";
+import Firebase, { db } from "../../FirebaseConfig";
 
 export const USER = {
   UPDATE_EMAIL: "UPDATE_EMAIL",
@@ -32,7 +32,18 @@ export const signup = (email, password) => {
   return async(dispatch) => {
     try{
       const response = await Firebase.auth().createUserWithEmailAndPassword(email, password);
-      dispatch({type: USER.SIGNUP, payload: response.user});
+      if(response.user.uid) {
+        const user = {
+          uid: response.user.uid,
+          email: email,
+        }
+
+        db.collection("users")
+        .doc(user.uid)
+        .set(user);
+
+        dispatch({type: USER.SIGNUP, payload: user});
+      }
     }catch (e) {
       console.log(e);
     }
