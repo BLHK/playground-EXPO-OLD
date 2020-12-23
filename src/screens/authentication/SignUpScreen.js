@@ -1,44 +1,26 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import Firebase from "../../FirebaseConfig";
+import { connect } from 'react-redux';
+import { updateEmail, updatePassword, signup } from "../../redux/ActionCreators/UserActions";
 
-
-
-const SignUp = (props) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSignUp = () => {
-    Firebase.auth().createUserWithEmailAndPassword(email, password)
-    .catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      if (errorCode == 'auth/weak-password') {
-        alert('The password is too weak.');
-      } else {
-        console.log("ErrorMessage: ", errorMessage);
-      }
-      console.log("Error: ", error);
-    });
-  }
+const SignUpScreen = (props) => {
 
   return (
   <View style={styles.container}>
     <TextInput
       style={styles.inputBox}
-      onChangeText={email => setEmail(email)}
-      defaultValue={email}
+      value={props.email}
+      onChangeText={email => props.updateEmail(email)}
       placeholder='Email'
     />
     <TextInput
       style={styles.inputBox}
-      onChangeText={password => setPassword(password)}
-      defaultValue={password}
+      value={props.password}
+      onChangeText={password => props.updatePassword(password)}
       placeholder='Password'
       secureTextEntry={true}
     />
-    <TouchableOpacity style={styles.button} onPress={() => handleSignUp(email, password)}>
+    <TouchableOpacity style={styles.button} onPress={() => props.signup(props.email, props.password)}>
       <Text style={styles.buttonText}>Signup</Text>
     </TouchableOpacity>
     <TouchableOpacity style={{...styles.button, backgroundColor: 'red'}} 
@@ -48,6 +30,19 @@ const SignUp = (props) => {
   </View>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    email : state.user.email,
+    password : state.user.password,
+  }
+};
+
+const mapDispatchToProps = {
+  updateEmail, updatePassword, signup
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreen);
 
 const styles = StyleSheet.create({
   container: {
@@ -85,5 +80,3 @@ const styles = StyleSheet.create({
     fontSize: 12
   }
 })
-
-export default SignUp

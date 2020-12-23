@@ -1,4 +1,3 @@
-import axios from "axios";
 import Firebase from "../../FirebaseConfig";
 
 export const USER = {
@@ -30,10 +29,9 @@ export const login = () => {
   }
 }
 
-export const signup = () => {
-  return async(dispatch, getState) => {
+export const signup = (email, password) => {
+  return async(dispatch) => {
     try{
-      const {email, password} = getState.user;
       const response = await Firebase.auth().createUserWithEmailAndPassword(email, password);
       dispatch({type: USER.SIGNUP, payload: response.user});
     }catch (e) {
