@@ -1,14 +1,17 @@
 import { USER } from "../ActionCreators/UserActions";
 
 const initialState = {
-  email: "",
-  password: "",
+  loggedIn: false,
+  user: {}
 };
 
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER.LOGIN:
-        return action.payload
+      return {
+        loggedIn: true,
+        user: {...action.payload}
+      }
     case USER.SIGNUP:
         return action.payload
     case USER.UPDATE_EMAIL:
