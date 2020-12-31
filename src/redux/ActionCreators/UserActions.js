@@ -49,24 +49,24 @@ export const getUser = (uid) => {
   }
 }
 
-// export const signup = (email, password) => {
-//   return async(dispatch) => {
-//     try{
-//       const response = await Firebase.auth().createUserWithEmailAndPassword(email, password);
-//       if(response.user.uid) {
-//         const user = {
-//           uid: response.user.uid,
-//           email: email,
-//         }
+export const signup = (email, password) => {
+  return async(dispatch) => {
+    try{
+      const response = await Firebase.auth().createUserWithEmailAndPassword(email, password);
+      if(response.user.uid) {
+        const user = {
+          uid: response.user.uid,
+          email: email,
+        }
 
-//         db.collection("users")
-//         .doc(user.uid)
-//         .set(user);
+        db.collection("users")
+        .doc(user.uid)
+        .set(user);
 
-//         dispatch({type: USER.SIGNUP, payload: user});
-//       }
-//     }catch (e) {
-//       console.log(e);
-//     }
-//   }
-// }
+        dispatch({type: USER.SIGNUP, payload: user});
+      }
+    }catch (e) {
+      console.log(e);
+    }
+  }
+}
