@@ -8,6 +8,7 @@ import {
   getUsers,
   getUserById,
 } from "../redux/ActionCreators/UsersActions";
+import {logout} from "../redux/ActionCreators/UserActions";
 import { openModal, closeModal } from "../redux/ActionCreators/ModalActions";
 
 const ProfileScreen = (props) => {
@@ -60,6 +61,7 @@ const ProfileScreen = (props) => {
         title="Check modal state"
         onPress={() => console.log(props.modalActive)}
       />
+      <Button title="Logout" onPress={() => props.logout()} />
     </View>
   );
 };
@@ -76,6 +78,7 @@ const mapDispatchToProps = {
   getUserById,
   openModal,
   closeModal,
+  logout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);

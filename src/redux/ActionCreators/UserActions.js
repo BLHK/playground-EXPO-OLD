@@ -3,8 +3,9 @@ import Firebase, { db } from "../../FirebaseConfig";
 export const USER = {
   UPDATE_EMAIL: "UPDATE_EMAIL",
   UPDATE_PASSWORD: "UPDATE_PASSWORD",
-  LOGIN: "LOGIN",
   SIGNUP: "SIGNUP",
+  LOGIN: "LOGIN",
+  LOGOUT: "LOGOUT",
 };
 
 export const updateEmail = (email) => ({
@@ -30,6 +31,18 @@ export const login = (email, password) => {
       dispatch(getUser(response.user.uid));
     }catch(e) {
       console.log(e);
+    }
+  }
+}
+
+export const logout = () => {
+  return async (dispatch) => {
+    try{
+      Firebase.auth().signOut().then(() => {
+        dispatch({type: USER.LOGOUT})
+      })
+    }catch(e) {
+      alert(e);
     }
   }
 }

@@ -7,16 +7,22 @@ const initialState = {
 
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
-    case USER.LOGIN:
-      return {
-        loggedIn: true,
-        user: {...action.payload}
-      }
     case USER.SIGNUP:
         return {
           loggedIn: true,
           user: {...action.payload}
         }
+    case USER.LOGIN:
+      return {
+        loggedIn: true,
+        user: {...action.payload}
+      }
+    case USER.LOGOUT: {
+      return {
+        loggedIn: false,
+        user: {},
+      }
+    }
     case USER.UPDATE_EMAIL:
         return { ...state, email: action.payload }
     case USER.UPDATE_PASSWORD:
