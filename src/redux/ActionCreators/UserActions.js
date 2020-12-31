@@ -26,7 +26,7 @@ export const signedIn = (isSignedIn) => ({
 export const login = (email, password) => {
   return async (dispatch) => {
     try{
-      const response = await Firebase.auth().signInWithEmailAndPassword(email, "apaapa");
+      const response = await Firebase.auth().signInWithEmailAndPassword(email, password);
 
       dispatch(getUser(response.user.uid));
     }catch(e) {
