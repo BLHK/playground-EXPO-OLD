@@ -6,6 +6,7 @@ export const USER = {
   SIGNUP: "SIGNUP",
   LOGIN: "LOGIN",
   LOGOUT: "LOGOUT",
+  LOADING: "LOADING",
 };
 
 export const updateEmail = (email) => ({
@@ -23,14 +24,22 @@ export const signedIn = (isSignedIn) => ({
   payload: isSignedIn,
 })
 
+export const loading = (isLoading) => ({
+  type: USER.LOADING,
+  payload: isLoading,
+})
+
 export const login = (email, password) => {
   return async (dispatch) => {
     try{
-      const response = await Firebase.auth().signInWithEmailAndPassword(email, password);
+      dispatch(loading(true));
 
+      const response = await Firebase.auth().signInWithEmailAndPassword(email, password);
       dispatch(getUser(response.user.uid));
     }catch(e) {
       console.log(e);
+    }finally{
+      dispatch(loading(false));
     }
   }
 }
