@@ -20,22 +20,23 @@ const UserReducer = (state = initialState, action) => {
         loggedIn: true,
         user: {...action.payload}
       }
-    case USER.LOGOUT: {
+    case USER.LOGOUT:
       return {
         ...state,
         loggedIn: false,
         user: {},
       }
-    }
     case USER.UPDATE_EMAIL:
-        return { ...state, email: action.payload }
+      return { ...state, email: action.payload }
     case USER.UPDATE_PASSWORD:
-        return { ...state, password: action.payload }
+      return { ...state, password: action.payload }
     case USER.LOADING:
-        return { ...state, loading: action.payload }
+      return { ...state, loading: action.payload }
+    case USER.UPDATE_LOCATION:
+      return { ...state, user: {...state.user, location: action.payload }}
     default:
         return state
-}
+  }
 }
 
 export default UserReducer;

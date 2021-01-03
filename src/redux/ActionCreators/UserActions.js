@@ -7,6 +7,7 @@ export const USER = {
   LOGIN: "LOGIN",
   LOGOUT: "LOGOUT",
   LOADING: "LOADING",
+  UPDATE_LOCATION: "UPDATE_LOCATION",
 };
 
 export const updateEmail = (email) => ({
@@ -27,6 +28,11 @@ export const signedIn = (isSignedIn) => ({
 export const loading = (isLoading) => ({
   type: USER.LOADING,
   payload: isLoading,
+})
+
+export const updateUserLocation = (location) => ({
+  type: USER.UPDATE_LOCATION,
+  payload: location,
 })
 
 export const login = (email, password) => {

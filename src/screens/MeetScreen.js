@@ -7,11 +7,25 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { getUsers } from "../redux/ActionCreators/UsersActions";
+import { updateUserLocation } from "../redux/ActionCreators/UserActions";
 import { openModal } from "../redux/ActionCreators/ModalActions";
 import MeetUserCard from "../components/MeetUserCard";
 import UserModal from "../components/UserModal";
+import * as Location from 'expo-location';
 
 const MeetScreen = (props) => {
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestPermissionsAsync();
+      if (status !== 'granted') {
+        alert('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      props.updateUserLocation(location);
+    })();
+  }, []);
   //Code for only running at startup. Dont wanna spam requests, so leaving this commented now.
   // useEffect(() => {
   //   if (props.users.length == 0 && props.loading !== true) {
@@ -48,6 +62,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   getUsers,
   openModal,
+  updateUserLocation,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MeetScreen);
