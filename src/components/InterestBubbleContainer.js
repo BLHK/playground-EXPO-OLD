@@ -16,11 +16,10 @@ export default InterestBubbleContainer;
 
 const styles = StyleSheet.create({
   interestContainer: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'center',
     flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignContent: 'center',
   },
 })
