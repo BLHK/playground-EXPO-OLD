@@ -14,6 +14,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 
 import SignInScreen from './screens/authentication/SignInScreen';
 import SignUpScreen from './screens/authentication/SignUpScreen';
+import ProfileSetupScreen from './screens/authentication/ProfileSetupScreen';
 
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -53,6 +54,7 @@ const AppNavigation = (props) => {
 const AuthNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="ProfileSetup" component={ProfileSetupScreen} />
       <Stack.Screen name="SignIn" component={SignInScreen} /> 
       <Stack.Screen name="SignUp" component={SignUpScreen} />
     </Stack.Navigator>
