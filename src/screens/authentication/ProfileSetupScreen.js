@@ -1,6 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text, Button, } from 'react-native';
-import InterestBubble from '../../components/InterestBubble';
+import { View, StyleSheet, } from 'react-native';
 import InterestBubbleContainer from '../../components/InterestBubbleContainer.js';
 
 const myInterests = [
@@ -11,8 +10,6 @@ const myInterests = [
 ]
 
 const ProfileSetupScreen = (props) => {
-  
-
   return (
     <View style={styles.container}>
       <InterestBubbleContainer interests={myInterests}/>

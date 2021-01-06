@@ -3,7 +3,6 @@ import { View, StyleSheet } from 'react-native';
 import InterestBubble from './InterestBubble';
 
 const InterestBubbleContainer = (props) => {
-  console.log(props.interests)
   return(
     <View style={styles.interestContainer}>
       {props.interests.map(interest => (
