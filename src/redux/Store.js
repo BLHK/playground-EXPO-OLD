@@ -1,10 +1,12 @@
-import { createStore, applyMiddleware, compose } from "redux";
+import {combineReducers} from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { composeWithDevTools } from "redux-devtools-extension";
-
 import ReduxThunk from "redux-thunk";
-import rootReducer from "./reducers/index";
+import { configureStore } from '@reduxjs/toolkit'
+
+import userReducer from '../redux/reducers/UserReducer';
+import usersReducer from "../redux/reducers/UsersReducer";
+import modalReducer from "../redux/reducers/ModalReducer";
 
 function logger({ getState }) {
   return (next) => (action) => {
@@ -16,6 +18,12 @@ function logger({ getState }) {
   };
 }
 
+const reducers = combineReducers({
+  user: userReducer,
+  users: usersReducer,
+  modal: modalReducer,
+ });
+
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
@@ -23,11 +31,13 @@ const persistConfig = {
   blacklist: ["modal"],
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, reducers)
 
-const middleware = applyMiddleware(ReduxThunk, logger);
-
-const store = createStore(persistedReducer, composeWithDevTools(middleware));
+const store = configureStore({
+  reducer: persistedReducer,
+  devTools: process.env.NODE_ENV !== 'production',
+  middleware: [ReduxThunk, logger]
+})
 
 let persistor = persistStore(store);
 
