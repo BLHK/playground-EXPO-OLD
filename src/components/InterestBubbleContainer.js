@@ -16,7 +16,7 @@ export default InterestBubbleContainer;
 
 const styles = StyleSheet.create({
   interestContainer: {
-    // flex: 1,
+    flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
