@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, Button } from 'react-native';
 import InterestBubbleContainer from '../../components/InterestBubbleContainer.js';
+import CustomImagePicker from '../../components/CustomImagePicker'
 
 const myInterests = [
   {id: 1, name: "Gym", selected: false},
@@ -13,7 +14,7 @@ const ProfileSetupScreen = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.imagePicker}>
-      <Button title="Image picker"/>
+        <CustomImagePicker />
       </View>
       <InterestBubbleContainer interests={myInterests}/>
     </View>
@@ -24,7 +25,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    // alignItems: 'flex-end'
   },
   imagePicker: {
     flex: 1,
