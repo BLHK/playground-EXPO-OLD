@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
 
-export default ChatScreen = () => {
+const ChatScreen = ({props}) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -35,3 +35,5 @@ export default ChatScreen = () => {
     />
   );
 };
+
+export default ChatScreen;
