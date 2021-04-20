@@ -1,11 +1,11 @@
 import React from "react";
-import { TouchableOpacity, FlatList, SafeAreaView } from "react-native";
+import { TouchableOpacity, FlatList, SafeAreaView, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import ConversationCard from "../components/ConversationCard";
 
 const MessagesScreen = (props) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={props.users}
         renderItem={({ item }) => (
@@ -27,3 +27,9 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(MessagesScreen);
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+})
