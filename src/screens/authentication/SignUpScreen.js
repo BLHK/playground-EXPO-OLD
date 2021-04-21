@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { updateEmail, updatePassword, signup } from "../../redux/ActionCreators/UserActions";
+import { updateEmail, updatePassword, signupWithEmail } from "../../redux/ActionCreators/UserActions";
 
 const SignUpScreen = (props) => {
 
@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  updateEmail, updatePassword, signup
+  updateEmail, updatePassword, signup: signupWithEmail
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreen);

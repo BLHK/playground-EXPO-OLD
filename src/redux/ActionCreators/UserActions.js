@@ -77,7 +77,7 @@ export const getUser = (uid) => {
   }
 }
 
-export const signup = (email, password) => {
+export const signupWithEmail = (email, password) => {
   return async(dispatch) => {
     try{
       const response = await Firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -87,9 +87,9 @@ export const signup = (email, password) => {
           email: email,
         }
 
-        db.collection("users")
-        .doc(user.uid)
-        .set(user);
+        await db.collection("users")
+            .doc(user.uid)
+            .set(user);
 
         dispatch({type: USER.SIGNUP, payload: user});
       }
