@@ -1,29 +1,29 @@
 import * as firebase from "firebase";
 import "firebase/firestore";
 import {
-  API_KEY,
-  AUTH_DOMAIN,
-  DATABASE_URL,
-  PROJECT_ID,
-  STORAGE_BUCKET,
-  MESSAGE_SENDER_ID,
-  APP_ID
+    API_KEY,
+    AUTH_DOMAIN,
+    DATABASE_URL,
+    PROJECT_ID,
+    STORAGE_BUCKET,
+    MESSAGE_SENDER_ID,
+    APP_ID
 } from '@env';
 
 const firebaseConfig = {
-  apiKey: API_KEY,
-  authDomain: AUTH_DOMAIN,
-  databaseURL: DATABASE_URL,
-  projectId: PROJECT_ID,
-  storageBucket: STORAGE_BUCKET,
-  messagingSenderId: MESSAGE_SENDER_ID,
-  appId: APP_ID,
+    apiKey: API_KEY,
+    authDomain: AUTH_DOMAIN,
+    databaseURL: DATABASE_URL,
+    projectId: PROJECT_ID,
+    storageBucket: STORAGE_BUCKET,
+    messagingSenderId: MESSAGE_SENDER_ID,
+    appId: APP_ID,
 };
 
 
 let Firebase;
 if (firebase.apps.length === 0) {
-  Firebase = firebase.initializeApp(firebaseConfig);
+    Firebase = firebase.initializeApp(firebaseConfig);
 }
 
 export default Firebase;
@@ -31,5 +31,5 @@ export default Firebase;
 export const db = firebase.firestore();
 
 export const getServerTimeStamp = () => {
-  firebase.firestore.Timestamp.fromDate(new Date());
+    firebase.firestore.Timestamp.fromDate(new Date());
 };
