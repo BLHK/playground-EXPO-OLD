@@ -8,7 +8,7 @@ const initialState = {
 
 const UserReducer = (state = initialState, action) => {
     switch (action.type) {
-        case USER.SIGNUP:
+        case USER.SIGNUP_WITH_EMAIL:
             return {
                 ...state,
                 loggedIn: true,

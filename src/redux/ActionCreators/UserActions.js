@@ -3,7 +3,7 @@ import Firebase, {db} from "../../FirebaseConfig";
 export const USER = {
     UPDATE_EMAIL: "UPDATE_EMAIL",
     UPDATE_PASSWORD: "UPDATE_PASSWORD",
-    SIGNUP: "SIGNUP",
+    SIGNUP_WITH_EMAIL: "SIGNUP_WITH_EMAIL",
     LOGIN: "LOGIN",
     LOGOUT: "LOGOUT",
     LOADING: "LOADING",
@@ -41,6 +41,7 @@ export const login = (email, password) => {
             dispatch(loading(true));
 
             const response = await Firebase.auth().signInWithEmailAndPassword(email, password);
+
             dispatch(getUser(response.user.uid));
         } catch (e) {
             console.log(e);
@@ -80,8 +81,21 @@ export const getUser = (uid) => {
 export const signupWithEmail = (email, password) => {
     return async (dispatch) => {
         try {
-            const response = await Firebase.auth().createUserWithEmailAndPassword(email, password);
-            if (response.user.uid) {
+            const user = await Firebase.auth().createUserWithEmailAndPassword(email, password)
+                .catch(function(error) {
+                    let errorCode = error.code;
+                    let errorMessage = error.message;
+                    if (errorCode === 'auth/weak-password') {
+                        alert(errorMessage);
+                    } else if (errorCode === 'auth/invalid-email') {
+                        alert('Email is not valid.');
+                    } else {
+                        alert(errorMessage);
+                    }
+                    console.log(error);
+                });
+
+            if (user.uid) {
                 const user = {
                     uid: response.user.uid,
                     email: email,
@@ -91,10 +105,10 @@ export const signupWithEmail = (email, password) => {
                     .doc(user.uid)
                     .set(user);
 
-                dispatch({type: USER.SIGNUP, payload: user});
+                dispatch({type: USER.SIGNUP_WITH_EMAIL, payload: user});
             }
         } catch (e) {
-            console.log(e);
+            console.log(e.toString());
         }
     }
 }

@@ -20,7 +20,7 @@ const SignUpScreen = (props) => {
                 placeholder='Password'
                 secureTextEntry={true}
             />
-            <TouchableOpacity style={styles.button} onPress={() => props.signup(props.email, props.password)}>
+            <TouchableOpacity style={styles.button} onPress={() => props.signupWithEmail(props.email, props.password)}>
                 <Text style={styles.buttonText}>Signup</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{...styles.button, backgroundColor: 'red'}}
@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    updateEmail, updatePassword, signup: signupWithEmail
+    updateEmail, updatePassword, signupWithEmail
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreen);
