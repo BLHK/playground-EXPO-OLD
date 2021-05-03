@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, TextInput, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {connect} from 'react-redux';
-import {updateEmail, updatePassword, signupWithEmail} from "../../redux/ActionCreators/UserActions";
+import {updateEmail, updatePassword} from "../../redux/ActionCreators/UserActions";
+import  {signupWithEmail} from "../../api/FirebaseAPI";
 
 const SignUpScreen = (props) => {
-
     return (
         <View style={styles.container}>
             <TextInput
