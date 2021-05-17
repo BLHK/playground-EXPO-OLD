@@ -1,23 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, StyleSheet, TouchableOpacity, Text, Button, ActivityIndicator} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import {connect} from 'react-redux';
-import {updateEmail, updatePassword, login, getUser, signedIn} from "../../redux/ActionCreators/UserActions";
+import {updateEmail, updatePassword, getUser, signedIn} from "../../redux/ActionCreators/UserActions";
+import {login} from "../../api/FirebaseAPI";
 
 const SignInScreen = (props) => {
-
-    // useEffect(() => {
-    //   Firebase.auth().onAuthStateChanged(user => {
-    //     if (user) {
-    //       props.getUser(user.uid)
-    //       if(props.user != null){
-    //         props.signedIn(true);
-    //       }
-    //     }else {
-
-    //     }
-    //   })
-    // });
 
     if (props.loading) {
         return (
