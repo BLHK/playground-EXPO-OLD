@@ -8,12 +8,12 @@ import {
     getUsers,
     getUserById,
 } from "../redux/ActionCreators/UsersActions";
-import {logout} from "../redux/ActionCreators/UserActions";
+
 import {openModal, closeModal} from "../redux/ActionCreators/ModalActions";
+import {logout} from "../api/FirebaseAPI";
 
 const ProfileScreen = (props) => {
     const [image, setImage] = useState(null);
-
     useEffect(() => {
         (async () => {
             if (Platform.OS !== "web") {
