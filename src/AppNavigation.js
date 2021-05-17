@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
+import Firebase from '../src/FirebaseConfig';
 import {connect} from 'react-redux';
 import {NavigationContainer} from "@react-navigation/native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
@@ -24,11 +25,24 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const AppNavigation = (props) => {
+  const [user, setUser] = useState();
+
+  // Handle user state changes
+  function onAuthStateChanged(user) {
+    setUser(user);
+    //if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const subscriber = Firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
     return (
         <NavigationContainer>
             <Stack.Navigator screenOptions={{headerShown: false}}>
 
-                {props.loggedIn === false ? (
+                {!user ? (
                     <Stack.Screen name="Authentication" component={AuthNavigator}/>
                 ) : (
                     <>
