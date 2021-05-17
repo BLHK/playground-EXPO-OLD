@@ -1,8 +1,8 @@
 import {USER} from "../ActionCreators/UserActions";
 
 const initialState = {
-    loggedIn: false,
     loading: false,
+    profileCompleted: false,
     user: {},
 };
 
@@ -11,19 +11,17 @@ const UserReducer = (state = initialState, action) => {
         case USER.SIGNUP_WITH_EMAIL:
             return {
                 ...state,
-                loggedIn: true,
                 user: {...action.payload}
             }
         case USER.LOGIN:
             return {
                 ...state,
-                loggedIn: true,
                 user: {...action.payload}
             }
         case USER.LOGOUT:
             return {
                 ...state,
-                loggedIn: false,
+                profileCompleted: false,
                 user: {},
             }
         case USER.UPDATE_EMAIL:

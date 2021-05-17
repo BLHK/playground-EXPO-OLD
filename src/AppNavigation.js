@@ -45,20 +45,24 @@ const AppNavigation = (props) => {
                 {!user ? (
                     <Stack.Screen name="Authentication" component={AuthNavigator}/>
                 ) : (
-                    <>
-                        <Stack.Screen name="Tabs" component={TabNavigator}/>
-                        <Stack.Screen name="Camera" component={CameraScreen}/>
-                        <Stack.Screen
-                            name="User"
-                            component={UserScreen}
-                            options={{headerShown: true}}
-                        />
-                        <Stack.Screen
-                            name="ChatScreen"
-                            component={ChatScreen}
-                            options={{headerShown: true}}
-                        />
-                    </>
+                    !props.profileCompleted ? (
+                        <Stack.Screen name="ProfileSetup" component={ProfileSetupScreen}/>
+                        ) : (
+                        <>
+                            <Stack.Screen name="Tabs" component={TabNavigator}/>
+                            <Stack.Screen name="Camera" component={CameraScreen}/>
+                            <Stack.Screen
+                                name="User"
+                                component={UserScreen}
+                                options={{headerShown: true}}
+                            />
+                            <Stack.Screen
+                                name="ChatScreen"
+                                component={ChatScreen}
+                                options={{headerShown: true}}
+                            />
+                        </>
+                        )
                 )}
             </Stack.Navigator>
         </NavigationContainer>
@@ -69,7 +73,6 @@ const AuthNavigator = () => {
     return (
         <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="SignIn" component={SignInScreen}/>
-            <Stack.Screen name="ProfileSetup" component={ProfileSetupScreen}/>
             <Stack.Screen name="SignUp" component={SignUpScreen}/>
         </Stack.Navigator>
     )
@@ -126,7 +129,7 @@ const TabNavigator = () => {
 
 const mapStateToProps = (state) => {
     return {
-        loggedIn: state.user.loggedIn
+        profileCompleted: state.user.profileCompleted,
     }
 }
 
