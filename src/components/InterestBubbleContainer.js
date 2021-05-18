@@ -6,7 +6,7 @@ const InterestBubbleContainer = (props) => {
     return (
         <View style={styles.interestContainer}>
             {props.interests.map(interest => (
-                <InterestBubble key={interest.id} text={interest.name} selected={interest.selected}/>
+                <InterestBubble key={interest.id} id={interest.id} text={interest.name}/>
             ))}
         </View>
     );

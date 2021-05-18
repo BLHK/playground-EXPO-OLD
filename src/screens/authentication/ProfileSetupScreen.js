@@ -2,24 +2,30 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import InterestBubbleContainer from '../../components/InterestBubbleContainer.js';
 import CustomImagePicker from '../../components/CustomImagePicker'
+import {connect} from "react-redux";
 
-const myInterests = [
-    {id: 1, name: "Gym", selected: false},
-    {id: 2, name: "Reading", selected: false},
-    {id: 3, name: "Going to the cinema", selected: false},
-    {id: 4, name: "Studyingasdadadsa", selected: false},
-]
-
-const ProfileSetupScreen = () => {
+const ProfileSetupScreen = (props) => {
     return (
         <View style={styles.container}>
             <View style={styles.imagePicker}>
                 <CustomImagePicker/>
             </View>
-            <InterestBubbleContainer interests={myInterests}/>
+                <InterestBubbleContainer interests={props.interestCollection}/>
         </View>
     );
 }
+
+const mapStateToProps = (state) => {
+    return {
+        interestCollection: state.application.interestCollection,
+    }
+};
+
+const mapDispatchToProps = {
+    //TODO Add dispatch for updating selected interests.
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileSetupScreen);
 
 const styles = StyleSheet.create({
     container: {
@@ -32,5 +38,3 @@ const styles = StyleSheet.create({
         padding: 10,
     }
 })
-
-export default ProfileSetupScreen;
