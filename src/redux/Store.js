@@ -7,6 +7,7 @@ import {configureStore} from '@reduxjs/toolkit'
 import userReducer from '../redux/reducers/UserReducer';
 import usersReducer from "../redux/reducers/UsersReducer";
 import modalReducer from "../redux/reducers/ModalReducer";
+import applicationReducer from "../redux/reducers/ApplicationReducer";
 
 function logger({getState}) {
     return (next) => (action) => {
@@ -22,6 +23,7 @@ const reducers = combineReducers({
     user: userReducer,
     users: usersReducer,
     modal: modalReducer,
+    application: applicationReducer,
 });
 
 const persistConfig = {
