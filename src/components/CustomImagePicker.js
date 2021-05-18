@@ -12,7 +12,6 @@ const CustomImagePicker = () => {
             } = await ImagePicker.requestCameraRollPermissionsAsync();
             if (status !== "granted") {
                 alert("Sorry, camera roll permission is necessary for uploading images from your storage.");
-
             } else {
                 await pickImage();
             }
@@ -24,7 +23,7 @@ const CustomImagePicker = () => {
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 3],
-            quality: 1,
+            quality: 0,
         });
 
         console.log(result);
@@ -36,10 +35,12 @@ const CustomImagePicker = () => {
 
     return (
         <View>
-            <Button title={"Album"} onPress={pickImageHandler}/>
-            {image && (
-                <Image source={{uri: image}} style={{width: 200, height: 200}}/>
-            )}
+            <Button title={"Pick image from Album"} onPress={pickImageHandler}/>
+            <View style={{width: 200, height: 200, backgroundColor: "black"}}>
+                {image && (
+                    <Image source={{uri: image}} style={{width: 200, height: 200}}/>
+                )}
+            </View>
         </View>
     )
 }
