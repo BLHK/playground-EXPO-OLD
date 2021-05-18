@@ -1,15 +1,13 @@
 import React, {useState} from 'react';
 import {Text, Pressable, StyleSheet} from 'react-native';
 import {connect} from "react-redux";
-import {setInterestSelected} from "../redux/ActionCreators/ApplicationActions";
+import {setupInterestSelected} from "../redux/ActionCreators/ApplicationActions";
 
 const InterestBubble = (props) => {
     const [pressed, setPressed] = useState(false)
 
     function pressHandler() {
-        console.log("AAAAA");
-        console.log(props);
-        props.setInterestSelected(props.id)
+        props.setupInterestSelected(props.id)
         setPressed(!pressed)
     }
 
@@ -21,7 +19,7 @@ const InterestBubble = (props) => {
 }
 
 const mapDispatchToProps = {
-    setInterestSelected,
+    setupInterestSelected: setupInterestSelected,
 };
 
 export default connect(null ,mapDispatchToProps)(InterestBubble);

@@ -9,26 +9,32 @@ const initialState = {
         {id: 4, name: "Studyingasdadadsa"},
     ],
     selectedInterests: [],
+    setupUserImages: [],
 };
 
-const UserReducer = (state = initialState, action) => {
+const ApplicationReducer = (state = initialState, action) => {
     switch (action.type) {
-        case APPLICATION.SET_INTEREST_COLLECTION:
+        case APPLICATION.SETUP_INTEREST_COLLECTION:
             return {
                 ...state,
                 interestCollection: {...action.payload}
             }
-        case APPLICATION.SET_INTEREST_SELECTED:
+        case APPLICATION.SETUP_INTEREST_SELECTED:
             return {
                 ...state,
                 selectedInterests:
                     (state.selectedInterests.includes(action.payload) ?
                     state.selectedInterests.filter(e => e !== action.payload) :
-                    state.selectedInterests.concat(action.payload))
+                    [...state.selectedInterests, action.payload])
+            }
+        case APPLICATION.SETUP_ADD_USER_IMAGES:
+            return {
+                ...state,
+                setupUserImages: [...state.setupUserImages, action.payload]
             }
         default:
             return state
     }
 }
 
-export default UserReducer;
+export default ApplicationReducer;

@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Button, Platform, Image} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import {setupAddUserImages} from "../redux/ActionCreators/ApplicationActions";
+import {connect} from "react-redux";
 
-const CustomImagePicker = () => {
-    const [image, setImage] = useState(null);
+const CustomImagePicker = (props) => {
 
     const pickImageHandler = async () => {
         if (Platform.OS !== "web") {
@@ -29,7 +30,7 @@ const CustomImagePicker = () => {
         console.log(result);
 
         if (!result.cancelled) {
-            setImage(result.uri);
+            props.setupAddUserImages(result.uri)
         }
     };
 
@@ -37,12 +38,22 @@ const CustomImagePicker = () => {
         <View>
             <Button title={"Pick image from Album"} onPress={pickImageHandler}/>
             <View style={{width: 200, height: 200, backgroundColor: "black"}}>
-                {image && (
-                    <Image source={{uri: image}} style={{width: 200, height: 200}}/>
+                {props.setupUserImages[0] && (
+                    <Image source={{uri: props.setupUserImages[0]}} style={{width: 200, height: 200}}/>
                 )}
             </View>
         </View>
     )
 }
 
-export default CustomImagePicker;
+const mapStateToProps = (state) => {
+    return {
+        setupUserImages: state.application.setupUserImages,
+    }
+};
+
+const mapDispatchToProps = {
+    setupAddUserImages: setupAddUserImages,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomImagePicker);
