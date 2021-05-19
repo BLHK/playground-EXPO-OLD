@@ -1,41 +1,51 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, Pressable, Text} from 'react-native';
 import InterestBubbleContainer from '../../components/InterestBubbleContainer.js';
 import CustomImagePicker from '../../components/CustomImagePicker'
 import {connect} from "react-redux";
+import {setupInterestSelected, setupSetContinueButton} from "../../redux/ActionCreators/ApplicationActions";
 
-const ProfileSetupScreen = (props) => {
+const ProfileSetupScreen = (props) => {  
+
+  useEffect(() => {
+    if(props.selectedInterests.length > 2 && props.setupUserImages.length > 0) {
+      props.setupSetContinueButton(false)
+    }else {
+      props.setupSetContinueButton(true)
+  }
+     // ? props.setupSetContinueButton(true) : props.setupSetContinueButton(false);
+  });
+
     return (
         <View style={styles.container}>
             <View style={styles.imagePicker}>
                 <CustomImagePicker/>
             </View>
-
-            <InterestBubbleContainer interests={props.interestCollection}/>
-
+            <InterestBubbleContainer/>
             <View>
-                <Pressable disable={true} style={styles.continueButton}>
-                    {({ pressed }) => (
-                        pressed ?
-                        <Text>I'm disabled</Text> :
-                            <Text>I'm enabled</Text>
+                <Pressable disable={props.setupContinueButton} style={styles.continueButton}>
+                    {(
+                        props.setupContinueButton ?
+                          <Text>I'm disabled</Text> :
+                          <Text>I'm enabled</Text>
                     )}
-
                 </Pressable>
             </View>
-
         </View>
     );
 }
 
 const mapStateToProps = (state) => {
     return {
-        interestCollection: state.application.interestCollection,
+        selectedInterests: state.application.selectedInterests,
+        setupUserImages: state.application.setupUserImages,
+        setupContinueButton: state.application.setupContinueButton,
     }
 };
 
 const mapDispatchToProps = {
-    //TODO Add dispatch for updating selected interests.
+  setupInterestSelected: setupInterestSelected,
+  setupSetContinueButton: setupSetContinueButton
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileSetupScreen);

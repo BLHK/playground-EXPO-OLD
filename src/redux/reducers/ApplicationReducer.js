@@ -10,6 +10,7 @@ const initialState = {
     ],
     selectedInterests: [],
     setupUserImages: [],
+    setupContinueButton: true,
 };
 
 const ApplicationReducer = (state = initialState, action) => {
@@ -31,6 +32,11 @@ const ApplicationReducer = (state = initialState, action) => {
             return {
                 ...state,
                 setupUserImages: [...state.setupUserImages, action.payload]
+            }
+        case APPLICATION.SETUP_SET_CONTINUE_BUTTON:
+            return {
+                ...state,
+                setupContinueButton: action.payload
             }
         default:
             return state

@@ -30,7 +30,7 @@ const persistConfig = {
     key: "root",
     storage: AsyncStorage,
     whitelist: ["users"],
-    blacklist: ["modal"],
+    blacklist: ["modal", "application"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers)
