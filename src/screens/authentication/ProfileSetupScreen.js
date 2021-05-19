@@ -1,19 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {View, StyleSheet, Pressable, Text} from 'react-native';
 import InterestBubbleContainer from '../../components/InterestBubbleContainer.js';
 import CustomImagePicker from '../../components/CustomImagePicker'
 import {connect} from "react-redux";
 import {setupInterestSelected, setupSetContinueButton} from "../../redux/ActionCreators/ApplicationActions";
 
-const ProfileSetupScreen = (props) => {  
+const ProfileSetupScreen = (props) => {
 
   useEffect(() => {
-    if(props.selectedInterests.length > 2 && props.setupUserImages.length > 0) {
-      props.setupSetContinueButton(false)
-    }else {
-      props.setupSetContinueButton(true)
-  }
-     // ? props.setupSetContinueButton(true) : props.setupSetContinueButton(false);
+      (props.selectedInterests.length > 2 && props.setupUserImages.length > 0) ?
+          props.setupSetContinueButton(false) :
+          props.setupSetContinueButton(true);
   });
 
     return (
