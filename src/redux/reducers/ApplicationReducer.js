@@ -6,11 +6,12 @@ const initialState = {
         {id: 1, name: "Gym"},
         {id: 2, name: "Reading"},
         {id: 3, name: "Going to the cinema"},
-        {id: 4, name: "Studyingasdadadsa"},
+        {id: 4, name: "Studying"},
     ],
     selectedInterests: [],
     setupUserImages: [],
     setupContinueButton: true,
+    setupUsernameTextField: "",
 };
 
 const ApplicationReducer = (state = initialState, action) => {
@@ -38,6 +39,8 @@ const ApplicationReducer = (state = initialState, action) => {
                 ...state,
                 setupContinueButton: action.payload
             }
+        case APPLICATION.SETUP_SET_USERNAME_TEXT_FIELD:
+            return {...state, setupUsernameTextField: action.payload}
         default:
             return state
     }
