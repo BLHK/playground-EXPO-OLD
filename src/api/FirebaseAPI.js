@@ -19,7 +19,7 @@ export const getUser = (uid) => {
 export const signupWithEmail = (email, password) => {
     return async (dispatch) => {
         try {
-            const user = await Firebase.auth().createUserWithEmailAndPassword(email, password)
+            const response = await Firebase.auth().createUserWithEmailAndPassword(email, password)
                 .catch(function(error) {
                     let errorCode = error.code;
                     let errorMessage = error.message;
@@ -32,23 +32,38 @@ export const signupWithEmail = (email, password) => {
                     }
                     console.log(error);
                 });
+            // if (response.user.uid) {
+            //     const newUser = {
+            //         uid: response.user.uid,
+            //         email: email,
+            //     }
+            //     console.log("got here");
+                
+            //     await db.collection("users")
+            //         .doc(response.user.uid)
+            //         .set(newUser);
 
-            if (user.uid) {
-                const user = {
-                    uid: response.user.uid,
-                    email: email,
-                }
-
-                await db.collection("users")
-                    .doc(user.uid)
-                    .set(user);
-
-                dispatch({type: USER.SIGNUP_WITH_EMAIL, payload: user});
-            }
+            //     dispatch({type: USER.SIGNUP_WITH_EMAIL, payload: newUser});
+            // }
         } catch (e) {
-            console.log(e.toString());
+          console.log(e.toString());
         }
     }
+}
+
+//Skapa funktion för att lägga till data till 
+export const addUserDetails = (userDetails) => {
+  return async () => {
+      try {
+        let user = Firebase.auth().currentUser;
+        user.getIdToken().then(idToken => {
+          db.collection("users").doc(user.uid).set(userDetails);
+          console.log(idToken)
+        });
+      } catch (e) {
+          console.log(e);
+      }
+  }
 }
 
 export const login = (email, password) => {

@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import Firebase, {db} from "../../FirebaseConfig";
 import {View, StyleSheet, Pressable, Text, TextInput} from 'react-native';
 import InterestBubbleContainer from '../../components/InterestBubbleContainer.js';
 import CustomImagePicker from '../../components/CustomImagePicker'
@@ -6,6 +7,7 @@ import {connect} from "react-redux";
 import {setupInterestSelected, setupSetContinueButton, setupSetUsernameTextField} from "../../redux/ActionCreators/ApplicationActions";
 
 const ProfileSetupScreen = (props) => {
+  let user = Firebase.auth().currentUser;
 
   useEffect(() => {
       (props.selectedInterests.length > 2 && props.setupUserImages.length > 0 && props.setupUsernameTextField.length > 1) ?
