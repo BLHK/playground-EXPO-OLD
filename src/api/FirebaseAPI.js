@@ -53,17 +53,24 @@ export const signupWithEmail = (email, password) => {
 
 //Skapa funktion för att lägga till data till 
 export const addUserDetails = (userDetails) => {
-  return async () => {
-      try {
-        let user = Firebase.auth().currentUser;
-        user.getIdToken().then(idToken => {
-          db.collection("users").doc(user.uid).set(userDetails);
-          console.log(idToken)
+    return async (dispatch) => {
+        try {
+            //let user = Firebase.auth().currentUser;
+
+            user.getIdToken().then(idToken => {
+            var userRef = db.collection("users").doc(idToken);
+
+            var setWithMerge = userRef.set({
+                userDetails
+            })
+            var result = db.collection("users").doc(idToken).set(userDetails);
+            dispatch({type: USER.LOGIN, payload: result});
+            console.log(idToken);
         });
-      } catch (e) {
+        } catch (e) {
           console.log(e);
-      }
-  }
+        }
+    }
 }
 
 export const login = (email, password) => {

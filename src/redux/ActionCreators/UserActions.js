@@ -6,6 +6,7 @@ export const USER = {
     LOGOUT: "LOGOUT",
     LOADING: "LOADING",
     UPDATE_LOCATION: "UPDATE_LOCATION",
+    ADD_USER_DETAILS: "ADD_USER_DETAILS",
 };
 
 export const updateEmail = (email) => ({
@@ -31,4 +32,9 @@ export const loading = (isLoading) => ({
 export const updateUserLocation = (location) => ({
     type: USER.UPDATE_LOCATION,
     payload: location,
+})
+
+export const addUserDetails = (userDetails) => ({
+    type: USER.ADD_USER_DETAILS,
+    payload: userDetails,
 })
