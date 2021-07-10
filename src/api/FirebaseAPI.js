@@ -55,15 +55,17 @@ export const signupWithEmail = (email, password) => {
 export const addUserDetails = (userDetails) => {
     return async (dispatch) => {
         try {
-            //let user = Firebase.auth().currentUser;
+            let user = Firebase.auth().currentUser;
 
             user.getIdToken().then(idToken => {
-            var userRef = db.collection("users").doc(idToken);
+            let userRef = db.collection("users").doc(idToken);
 
-            var setWithMerge = userRef.set({
-                userDetails
-            })
-            var result = db.collection("users").doc(idToken).set(userDetails);
+            let setWithMerge = userRef.set({
+                username: userDetails.username,
+                images: userDetails.images,
+                interests: userDetails.interests,
+            }, {merge: true})
+            //var result = db.collection("users").doc(idToken).set(userDetails);
             dispatch({type: USER.LOGIN, payload: result});
             console.log(idToken);
         });
