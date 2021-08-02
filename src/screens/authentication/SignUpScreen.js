@@ -2,7 +2,7 @@ import React from 'react';
 import {View, TextInput, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {connect} from 'react-redux';
 import {updateEmail, updatePassword} from "../../redux/ActionCreators/UserActions";
-import  {signupWithEmail} from "../../api/FirebaseAPI";
+import  {signUpWithEmail} from "../../api/FirebaseAPI";
 
 const SignUpScreen = (props) => {
     return (
@@ -20,7 +20,7 @@ const SignUpScreen = (props) => {
                 placeholder='Password'
                 secureTextEntry={true}
             />
-            <TouchableOpacity style={styles.button} onPress={() => props.signupWithEmail(props.email, props.password)}>
+            <TouchableOpacity style={styles.button} onPress={() => props.signUpWithEmail(props.email, props.password)}>
                 <Text style={styles.buttonText}>Signup</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{...styles.button, backgroundColor: 'red'}}
@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    updateEmail, updatePassword, signupWithEmail
+    updateEmail, updatePassword, signUpWithEmail: signUpWithEmail
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreen);

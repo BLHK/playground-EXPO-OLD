@@ -16,7 +16,7 @@ export const getUser = (uid) => {
     }
 }
 
-export const signupWithEmail = (email, password) => {
+export const signUpWithEmail = (email, password) => {
     return async (dispatch) => {
         try {
             const response = await Firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -51,7 +51,7 @@ export const signupWithEmail = (email, password) => {
     }
 }
 
-//Skapa funktion för att lägga till data till 
+//Skapa funktion för att lägga till data till firestore.
 export const addUserDetails = (userDetails) => {
     return async (dispatch) => {
         try {
