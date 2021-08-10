@@ -1,3 +1,5 @@
+import Firebase, {db} from "../../FirebaseConfig";
+
 export const USER = {
     UPDATE_EMAIL: "UPDATE_EMAIL",
     UPDATE_PASSWORD: "UPDATE_PASSWORD",
@@ -6,7 +8,7 @@ export const USER = {
     LOGOUT: "LOGOUT",
     LOADING: "LOADING",
     UPDATE_LOCATION: "UPDATE_LOCATION",
-    ADD_USER_DETAILS: "ADD_USER_DETAILS",
+    UPDATE_USER_DETAILS: "UPDATE_USER_DETAILS",
 };
 
 export const updateEmail = (email) => ({
@@ -19,22 +21,36 @@ export const updatePassword = (password) => ({
     payload: password,
 });
 
-export const signedIn = (isSignedIn) => ({
-    type: USER.SIGNED_IN,
-    payload: isSignedIn,
-})
-
 export const loading = (isLoading) => ({
     type: USER.LOADING,
     payload: isLoading,
-})
+});
 
 export const updateUserLocation = (location) => ({
     type: USER.UPDATE_LOCATION,
     payload: location,
-})
+});
 
-export const addUserDetails = (userDetails) => ({
-    type: USER.ADD_USER_DETAILS,
+export const updateUserDetailsNow = (userDetails) => ({
+    type: USER.UPDATE_USER_DETAILS,
     payload: userDetails,
-})
+});
+
+export const updateUserDetails = (userDetails) => {
+    return async (dispatch) => {
+        try {
+            let user = Firebase.auth().currentUser;
+
+            user.getIdToken().then(
+                idToken => {
+                let userRef = db.collection("users").doc(idToken).set(userDetails)
+                    .then(
+                        dispatch(updateUserDetailsNow(userDetails))
+                    );
+                console.log(userRef);
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+};

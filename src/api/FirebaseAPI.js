@@ -14,12 +14,12 @@ export const getUser = (uid) => {
             alert(e);
         }
     }
-}
+};
 
 export const signUpWithEmail = (email, password) => {
-    return async (dispatch) => {
+    return async () => {
         try {
-            const response = await Firebase.auth().createUserWithEmailAndPassword(email, password)
+            await Firebase.auth().createUserWithEmailAndPassword(email, password)
                 .catch(function(error) {
                     let errorCode = error.code;
                     let errorMessage = error.message;
@@ -49,31 +49,30 @@ export const signUpWithEmail = (email, password) => {
           console.log(e.toString());
         }
     }
-}
+};
 
 //Skapa funktion för att lägga till data till firestore.
-export const addUserDetails = (userDetails) => {
+export const updateUserDetails = (userDetails) => {
     return async (dispatch) => {
         try {
             let user = Firebase.auth().currentUser;
+            //let userDetails = {
+            //    username: userDetails.username,
+            //    images: userDetails.images,
+            //    interests: userDetails.interests,
+            //};
 
             user.getIdToken().then(idToken => {
-            let userRef = db.collection("users").doc(idToken);
+            let userRef = db.collection("users").doc(idToken).set(userDetails);
+            dispatch({type: USER.UPDATE_USER_DETAILS, payload: userDetails});
 
-            let setWithMerge = userRef.set({
-                username: userDetails.username,
-                images: userDetails.images,
-                interests: userDetails.interests,
-            }, {merge: true})
-            //var result = db.collection("users").doc(idToken).set(userDetails);
-            dispatch({type: USER.LOGIN, payload: result});
-            console.log(idToken);
+            console.log(userRef);
         });
         } catch (e) {
           console.log(e);
         }
     }
-}
+};
 
 export const login = (email, password) => {
     return async (dispatch) => {
@@ -89,7 +88,7 @@ export const login = (email, password) => {
             dispatch(loading(false));
         }
     }
-}
+};
 
 export const logout = () => {
     return async () => {
@@ -99,4 +98,4 @@ export const logout = () => {
             alert(e);
         }
     }
-}
+};

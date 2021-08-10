@@ -5,15 +5,24 @@ import InterestBubbleContainer from '../../components/InterestBubbleContainer.js
 import CustomImagePicker from '../../components/CustomImagePicker'
 import {connect} from "react-redux";
 import {setupInterestSelected, setupSetContinueButton, setupSetUsernameTextField} from "../../redux/ActionCreators/ApplicationActions";
+import {updateUserDetails} from "../../redux/ActionCreators/UserActions";
 
 const ProfileSetupScreen = (props) => {
-  let user = Firebase.auth().currentUser;
+  //let user = Firebase.auth().currentUser;
 
   useEffect(() => {
       (props.selectedInterests.length > 2 && props.setupUserImages.length > 0 && props.setupUsernameTextField.length > 1) ?
           props.setupSetContinueButton(false) :
           props.setupSetContinueButton(true);
   });
+
+  let getUserDetails = () => {
+      return {
+          username: props.setupUsernameTextField,
+          images: props.setupUserImages,
+          interests: props.selectedInterests,
+      }
+  };
 
     return (
         <View style={styles.container}>
@@ -29,7 +38,7 @@ const ProfileSetupScreen = (props) => {
             </View>
             <InterestBubbleContainer/>
             <View>
-                <Pressable disable={props.setupContinueButton} style={styles.continueButton}>
+                <Pressable disable={props.setupContinueButton} style={styles.continueButton} onPress={() => props.updateUserDetails(getUserDetails())}>
                     {(
                         props.setupContinueButton ?
                           <Text>I'm disabled</Text> :
@@ -39,7 +48,7 @@ const ProfileSetupScreen = (props) => {
             </View>
         </View>
     );
-}
+};
 
 const mapStateToProps = (state) => {
     return {
@@ -51,9 +60,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  setupInterestSelected: setupInterestSelected,
-  setupSetContinueButton: setupSetContinueButton,
-  setupSetUsernameTextField: setupSetUsernameTextField,
+    setupInterestSelected: setupInterestSelected,
+    setupSetContinueButton: setupSetContinueButton,
+    setupSetUsernameTextField: setupSetUsernameTextField,
+    updateUserDetails: updateUserDetails,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileSetupScreen);
@@ -82,4 +92,4 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 2,
     }
-})
+});
