@@ -45,7 +45,7 @@ const AppNavigation = (props) => {
                 {!user ? (
                     <Stack.Screen name="Authentication" component={AuthNavigator}/>
                 ) : (
-                    !props.profileCompleted ? (
+                    Object.keys(props.userDetails).length !== 0 ? (
                         <Stack.Screen name="ProfileSetup" component={ProfileSetupScreen}/>
                         ) : (
                         <>
@@ -67,7 +67,7 @@ const AppNavigation = (props) => {
             </Stack.Navigator>
         </NavigationContainer>
     );
-}
+};
 
 const AuthNavigator = () => {
     return (
@@ -76,7 +76,7 @@ const AuthNavigator = () => {
             <Stack.Screen name="SignUp" component={SignUpScreen}/>
         </Stack.Navigator>
     )
-}
+};
 
 const TabNavigator = () => {
     return (
@@ -129,8 +129,8 @@ const TabNavigator = () => {
 
 const mapStateToProps = (state) => {
     return {
-        profileCompleted: state.user.profileCompleted,
+        userDetails: state.user.userDetails,
     }
-}
+};
 
 export default connect(mapStateToProps)(AppNavigation);
