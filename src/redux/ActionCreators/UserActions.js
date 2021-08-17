@@ -31,12 +31,12 @@ export const updateUserLocation = (location) => ({
     payload: location,
 });
 
-export const updateUserDetailsNow = (userDetails) => ({
+export const updateUserDetails = (userDetails) => ({
     type: USER.UPDATE_USER_DETAILS,
     payload: userDetails,
 });
 
-export const updateUserDetails = (userDetails) => {
+export const updateUserDetailsInFirestoreAsync = (userDetails) => {
     return async (dispatch) => {
         try {
             let user = Firebase.auth().currentUser;
@@ -45,7 +45,7 @@ export const updateUserDetails = (userDetails) => {
                 idToken => {
                 let userRef = db.collection("users").doc(idToken).set(userDetails)
                     .then(
-                        dispatch(updateUserDetailsNow(userDetails))
+                        dispatch(updateUserDetails(userDetails))
                     );
                 console.log(userRef);
             });

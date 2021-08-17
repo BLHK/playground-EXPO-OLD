@@ -5,7 +5,7 @@ import InterestBubbleContainer from '../../components/InterestBubbleContainer.js
 import CustomImagePicker from '../../components/CustomImagePicker'
 import {connect} from "react-redux";
 import {setupInterestSelected, setupSetContinueButton, setupSetUsernameTextField} from "../../redux/ActionCreators/ApplicationActions";
-import {updateUserDetails} from "../../redux/ActionCreators/UserActions";
+import {updateUserDetailsInFirestoreAsync} from "../../redux/ActionCreators/UserActions";
 
 const ProfileSetupScreen = (props) => {
   //let user = Firebase.auth().currentUser;
@@ -38,7 +38,11 @@ const ProfileSetupScreen = (props) => {
             </View>
             <InterestBubbleContainer/>
             <View>
-                <Pressable disable={props.setupContinueButton} style={styles.continueButton} onPress={() => props.updateUserDetails(getUserDetails())}>
+                <Pressable disable={props.setupContinueButton}
+                           style={styles.continueButton}
+                           onPress={() =>
+                               props.updateUserDetailsInFirestoreAsync(getUserDetails())
+                           }>
                     {(
                         props.setupContinueButton ?
                           <Text>I'm disabled</Text> :
@@ -63,7 +67,7 @@ const mapDispatchToProps = {
     setupInterestSelected: setupInterestSelected,
     setupSetContinueButton: setupSetContinueButton,
     setupSetUsernameTextField: setupSetUsernameTextField,
-    updateUserDetails: updateUserDetails,
+    updateUserDetailsInFirestoreAsync: updateUserDetailsInFirestoreAsync,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileSetupScreen);
